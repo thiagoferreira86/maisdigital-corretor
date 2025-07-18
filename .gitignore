@@ -1,0 +1,36 @@
+# Sistema de pastas
+/vendor/
+node_modules/
+storage/
+uploads/
+
+# Arquivos de configuração sensíveis
+.env
+.env.*
+config.php
+
+# Logs
+*.log
+*.cache
+
+# Composer e lock files locais
+composer.lock
+
+# IDEs e arquivos de sistema
+*.sublime-project
+*.sublime-workspace
+*.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários
+*.bak
+*.tmp
+*.swp
+*.sql
+*.zip
+
+# Testes locais
+tests/
+coverage/
