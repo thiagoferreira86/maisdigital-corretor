@@ -1,0 +1,22 @@
+<div id="Seguros" class="services-section spaceup">
+    <div id="Cotar" class="container-flex">
+      <div class="title-wrap">
+        <h2 class="content-h2">Resolva tudo online</h2>
+      </div>
+      <div class="seguros-grade">
+           <?
+            $corretorseguros = Corretorseguro::find(0, array("corretor = '".$site->corretor."'"));
+            if(count($corretorseguros) >=1){ 
+            foreach($corretorseguros as $corretorseguro){ 
+                $seguro = Seguro::find($corretorseguro->seguro);
+                if(count($seguro) >=1){
+            ?>
+            <div class="seguro-grid">
+                <div class="seguro-icone"><img src="http://corretorpro.tk/imagens/icones/<?=$seguro->icone?>"></div>
+                <div class="seguro-titulo"><?=$seguro->titulo?></div>
+                <div class="seguro-subtitulo"><?=$seguro->subtitulo?></div>
+            </div>
+            <? } } } ?>
+      </div>
+    </div>
+    

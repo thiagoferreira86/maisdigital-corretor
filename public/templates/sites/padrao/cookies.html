@@ -1,0 +1,211 @@
+<?
+include 'classes/config.php'; 
+$base_pagina = 'https://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI];
+$url =  explode(".", "$_SERVER[HTTP_HOST]");
+$subdominio = $url[0];
+$base_site = 'https://'.$url[1].'.'.$url[2];
+$sites = Site::find(0, array("subdominio = '".$subdominio."' AND status = 1"));
+$site = $sites[0];
+if(count($sites) >=1){
+$view = new View();
+$view->site = $site->id;
+$view->save();
+
+
+$whatsapp = str_replace(array("(", ")", ".", " ", ",", "-"), "", $site->whatsapp);
+$url_seguradora = $_GET['url'];
+$seguradoras = Seguradora::find(0, array("url = '".$url_seguradora."'"));
+$seguradora = $seguradoras[0];
+$sitedefault = '1';
+$default = Sitedefault::find($sitedefault);
+if(!empty($site->cor_botoes)){
+    $cor_botoes = $site->cor_botoes;
+} else {
+    $cor_botoes = $default->cor_botoes;
+}
+} else { 
+ header("Location: 404.html");
+} ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><? echo $seguradora->nome.' - '.ucfirst($subdominio)?></title>
+  <meta content="." name="description">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+  <base href="/">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/corretorpro.webflow.css" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Rubik:300,regular,italic,500,700,900","Source Sans Pro:200,300,regular,600,700,900","Fira Sans:100,200,300,regular,500,600,700,800,900","Barlow:100,200,300,regular,500,600,700,800,900"]  }});</script>
+  <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link rel="shortcut icon" href="https://app.corretorpro.online/imagens/favicon.png" />
+  <link href="images/webclip.png" rel="apple-touch-icon">
+  <? include 'estilo.php'; ?>
+  <style>
+  h1{ font-size: 1.875rem; font-family: Inter, sans-serif; }
+  h2{ font-size: 0.938rem; font-family: Inter, sans-serif; color:black; text-align:left; margin: 24px 0 16px; }
+    .p-bk{
+        margin: 0cm;
+        margin-bottom: 8.0pt;
+        text-align: justify;
+        font-size: 15px;
+        font-weight: normal;
+        font-family: Inter, sans-serif;
+    }
+    .container-flex.seguradoras {
+        margin-bottom: 100px;
+        width: 80%;
+        margin-left: 10%;
+        max-width:80% !important;
+        top:125px;
+    }
+    .p-bk{
+        text-align:justify;
+    }
+    .a-seguros{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.seguro-icone img {
+    width: 100% !important; 
+    vertical-align: middle;
+    display: inline-block;
+}
+.seguro-grid{ margin-bottom: 26px; height: 305px; }
+.seguro-icone{ 
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+    padding: 5px;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: <?=$cor_botoes?> !important; 
+}
+@media only screen and (min-width:1500px){
+    .container-flex.seguradoras {
+       margin-bottom: 100px;
+        width: 60%;
+        margin-left: 20%;
+        max-width: 80% !important;
+    }
+}
+
+  </style>
+</head>
+<body>
+<div class="hero-section">
+    <div class="navigation">
+      <div class="container-navigation">
+        <div class="navigation-block-left">
+            <? if(!empty($site->logotipo)){ ?>
+            <a href="" class="logo-link w-inline-block w--current"><img src="https://app.corretorpro.online/imagens/logotipos/<?=$site->logotipo?>" width="220" alt="" class="logo-image"></a></div>
+            <? } else { ?>
+            <a href="" class="logo-link w-inline-block w--current"><img src="https://app.corretorpro.online/imagens/default/<?=$default->logotipo?>" width="220" alt="" class="logo-image"></a></div>
+            <? } ?>
+     
+        <div class="navigation-link-wrap">
+          <a href="/" class="navigation-link w-inline-block">
+            <div class="navigation-text">Home</div>
+          </a>
+          <a href="/#Seguros" class="navigation-link w-inline-block">
+            <div class="navigation-text">Seguros</div>
+          </a>
+          <a href="/#Sobre" class="navigation-link w-inline-block">
+            <div class="navigation-text">Sobre</div>
+          </a>
+          <a href="/#Seguradoras" class="navigation-link w-inline-block">
+            <div class="navigation-text">Seguradoras</div>
+          </a>
+          <a href="/#Contato" class="navigation-link w-inline-block">
+            <div class="navigation-text">Contato</div>
+          </a>
+        </div>
+        <div class="navigation-block-right"><a href="#" class="button-navigation whatsapp w-button">WhatsApp  </a>
+          <div data-delay="0" class="dropdown-mobile w-dropdown">
+            <div class="dropdown-toggle w-dropdown-toggle">
+              <a href="#" class="mobile-button-link w-inline-block">
+                <div data-w-id="b0b263d7-6243-973e-47bb-5169c5563162" data-animation-type="lottie" data-src="https://uploads-ssl.webflow.com/5d4bf31a8620ae8b6132d697/5d5be4b6eaf3b73429e80497_7943-circle-menu-closing.json" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="0" data-duration="0" data-ix2-initial-state="0" class="mobile-icon-animation"></div>
+              </a>
+            </div>
+            <nav class="mobiel-dropdown w-dropdown-list">
+                <a href="/" class="dropdown-link w-dropdown-link">Home</a>
+                <a href="#Seguros" class="dropdown-link w-dropdown-link">Seguros</a>
+                <a href="/#Sobre" class="dropdown-link w-dropdown-link">Sobre</a>
+                <a href="/#Seguradoras" class="dropdown-link w-dropdown-link">Seguradoras</a>
+                <a href="/#Contato" class="dropdown-link w-dropdown-link">Contato</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+</div>
+</div>
+  <div id="Cotar" class="container-flex seguradoras">
+        <div class="title-wrap">
+            <h1>O que são Cookies?</h1>
+        </div>
+        <div class="seguros-grade" id="Cookies">
+            <div class="col-lg-12">
+                <p class="p-bk mb-30">Ficamos espantados com a quantidade de sites que falam que utilizam Cookies, mas não fazem a mínima questão de explicar o que são eles. Pelo menos, de uma forma simples e amigável, como um bate papo com amigos tomando uma cerveja no fim de semana. </p>
+				<p class="p-bk mb-30">Um cookie é simplesmente uma tecnologia para lembrar algo sobre você. Sem os cookies, um site não consegue identificar o seu visitante. É como alguém que costuma visitar uma cidade turística, mas esquece sempre de tudo. Todas as vezes, que voltar a essa cidade, terá que passar novamente todos os dados e iniciar do zero todas as experiências. </p>
+				<p class="p-bk mb-30">Com os Cookies, o sites poderão manter você conectado, lembrar suas preferências, fornecer conteúdo personalizado baseado nos seus interesses e economizar muito do seu tempo. </p>
+            </div>
+            <div class="col-lg-12">
+                <br>
+                <h1 class="mb-20">Quais os tipo de Cookies?</h1>
+				<br>
+				<h2 class="mb-20">Cookies Primários e Cookies de Terceiros</h2>
+                <p class="p-bk mb-30">Cookies primários são cookies emitidos pelo domínio e seus subdomínios. Geralmente são utilizados para identificar preferências de idioma e local ou facilitar a funcionalidade básica do site.</p>
+				<p class="p-bk mb-30">Cookies de terceiros pertencem e são administrados por outras empresas, tais com parceiros de negócios, ou provedores de serviços. Estes cookies podem ser necessários para produzir certos formulários ou permitir alguma propaganda fora do site.</p>
+				
+				<h2 class="mb-20">Cookies da Sessão</h2>
+                <p class="p-bk mb-30">Cookies da sessão são cookies temporários que são utilizados para lembrar de você durante a sua jornada de visita no site, e eles perdem a validade quando você fecha o navegador ou reiniciar o seu computador. Por exemplo, quando você utiliza uma loja virtual. Para finalizar uma compra, você precisa autenticar-se para definir a forma de pagamento e endereço de entrega dos seus produtos ou serviços.</p>
+				
+				<h2 class="mb-20">Cookies Persistentes</h2>
+                <p class="p-bk mb-30">Cookies persistentes são utilizados para lembrar suas preferências do site e permanecem no seu desktop ou dispositivo móvel mesmo depois de você fechar o seu navegador ou efetuar uma reinicialização. Usamos estes cookies para analisar o comportamento do usuário e estabelecer padrões, de modo que possamos melhorar a funcionalidade do nosso site e oferecer uma experiência incrível de conteúdos e anúncios.</p>
+				
+				<h2 class="mb-20">Como os Cookies são usados para fins de anúncios?</h2>
+                <p class="p-bk mb-30">Cookies e tecnologias de anúncios nos ajudam a oferecer uma melhor experiências com nossos serviços. Eles também nos ajudam a coletar dados para fins de auditorias, pesquisas e relatórios de desempenho. Os pixels permitem que compreendamos e possamos melhorar a oferta de anúncios para você, e permitem ainda saber quando determinados anúncios já foram apresentados a você. Como o seu navegador pode requisitar anúncios e ‘web beacons’ diretamente de servidores de rede de anúncios, estas redes podem visualizar, editar ou configurar seus próprios cookies, como se você tivesse acessado uma página web do site deles.</p>
+				
+				<p class="p-bk mb-30">Embora nós não utilizemos cookies para criar um perfil do seu comportamento de navegação em sites de terceiros, nós utilizamos informações consolidadas de tais terceiros para mostrar a você anúncios relevantes, com base nos seus interesses. Não fornecemos qualquer informação que coletamos para anunciantes. Você pode optar por não ver anúncios fora do site e ou de terceiros, ajustando a sua configuração de cookies. Isso não removerá os anúncios das páginas que você visita, mas, ao invés disso, esta escolha resultará em anúncios que não são baseados nos seus interesses. Isto implica em que os anúncios que você visualiza não serão combinados com os seus interesses por aqueles cookies específicos.</p>
+				
+				<h2 class="mb-20">Como os Cookies de terceiros são usados?</h2>
+                <p class="p-bk mb-30">Para algumas das funções dentro dos nossos sites usamos fornecedores terceirizados, por exemplo, quando você visita uma página com um vídeo incorporado ou proveniente do YouTube. Estes vídeos ou links (e qualquer outro conteúdo de fornecedores terceirizados) podem conter cookies de terceiros, e nós recomendamos consultar as políticas de privacidade destes terceiros nos seus sites para informações relativas a sua utilização de cookies.</p>
+            </div>
+            <br><br><br><br><br>
+        </div>
+  </div>
+  <? include 'footer.php'; ?>

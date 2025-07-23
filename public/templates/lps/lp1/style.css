@@ -1,0 +1,310 @@
+.dm-sans-font {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+body{
+   width:100vw;
+   overflow-x:hidden;
+}
+body, h1, h2, h3, h4, h5, p, a, button, span, div, footer, section, label{
+    font-family: "DM Sans", sans-serif;
+}
+header{
+    height:6.944vw;
+    width:100%;
+    padding: 1.442vw 10vw;
+}
+header div{
+    height: 100%;
+    align-content: center;
+}
+header .col-md-5{
+    font-size:1.667vw;
+    font-weight:500;
+}
+#logoheader-mapfre{
+    margin-right: 2vh;
+    max-width:90%;
+}
+#logoheader-whatsapp{
+    width:3.542vw;
+}
+#s1, #s2, #s3{
+    width:100vw;
+    overflow:hidden;
+}
+#s1{
+    width:100%;
+    overflow:hidden;
+    align-content: center;
+    background-repeat:no-repeat !important;
+    background-size:cover !important;
+    background-position: left !important;
+    padding:5vh 5vw;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .575rem .75rem;
+}
+#s1 h1 {
+    color: #ffffff;
+    font-size: 3.889vw;
+    font-weight: 500;
+    margin: 10vw 5vw 2vw 0;
+}
+#s1 p{
+    color:#ffffff;
+    font-size:1.667vw;
+    font-weight:normal;
+}
+.form{
+    background:#ffffff;
+    padding: 2.778vw 3.472vw;
+    border-radius:5px;
+}
+.form h3{
+       font-size:1.667vw;
+}
+.form hr{
+    width:60%;
+    margin-bottom:3vh;
+}
+.form input{
+        margin-bottom:2vw;
+}
+.form label{
+    font-size:1.111vw;
+    margin-bottom:1.2vh;
+}
+.form .form-check-label{
+    color:#000000 !important;
+    font-size:0.868vw !important;
+    margin-bottom:3vh;
+}
+.btn-mapfre{
+    background: #D81E06;
+    border-radius:5px;
+    padding:0.7vw;
+    width:100%;
+    border:none;
+    color:#ffffff;
+    font-size:1.667vw;
+}
+#s2{
+   padding:7vh 10vw;
+   text-align:center;
+}
+#s2 h2{
+    font-size:3.333vw;
+    width:60%;
+    margin-left:20%;
+    margin-bottom:6vh;
+}
+#s2 .col-8{
+    font-size:1.389vw;
+}
+#s2 p{
+    font-size:1.389vw;
+    font-weight:500;
+    margin-top:1.389vw;
+}
+#s2 h4{
+    font-size:2.778vw;
+    font-weight:500;
+    margin:1.389vw 0;
+}
+#s2 p{
+    color: #7C8995;
+    font-size:1.667vw;
+    font-weight:400;
+    margin:1.389vw 0;
+    width:83%;
+    margin-left:8.5%;
+}
+#s2 .row{
+    margin-top:5vh;
+    margin-bottom:5vh;
+}
+#s2 .btn-mapfre{
+    width:35%;
+    margin: 3vh 0;
+}
+#s3 .col-md-8{
+    padding: 3vw 24vw 3vw 11vw;
+}
+#s3 h3{
+    font-size:3.333vw;
+}
+#s3 .col-10{
+    font-size:1.111vw;
+    margin-top: 3vh;
+}
+#s3 .col-2{
+    text-align:center;
+    margin-top: 3vh;
+}
+#s3 img{
+    width:100%;
+}
+#s3 .btn-mapfre{
+    width:85%;
+    margin: 5vh 0;
+}
+footer{
+    width:100%;
+    padding:3vw 10vw;
+    position:relative;
+}
+#logofooter-mapfre{
+    width:14.792vw;
+    margin-right:2vw;
+}
+#logofooter-corretora{
+    width:15.069vw;
+}
+footer p{
+   font-size: 1.667vw;
+   margin-top:2vh !important;
+}
+#triangulo-footer{
+    position:absolute;
+    right:0;
+    bottom:0;
+    width:6.944vw;
+}
+@media (max-width:1000px){
+    header{
+        height:auto;
+        padding: 4vw 8vw;
+    }
+    header .col-md-3{
+        width:50%;
+        float:left;
+    }
+    header .col-md-4{
+        width:50%;
+        float:left;
+    }
+    header .col-md-5 {
+        width: 100%;
+        padding: 4vw 5vw 0;
+        text-align: center;
+        font-size: 2.5vw;
+    }
+    #s1 h1 {
+        color: #ffffff;
+        font-size: 7vw;
+        font-weight: 500;
+        margin: 5vw 0;
+    }
+    #s1 p {
+        color: #ffffff;
+        font-size: 3.8vw;
+        font-weight: normal;
+    }
+    .form h3 {
+        font-size: 4.667vw;
+    }
+    .form label {
+        font-size: 3.111vw;
+        margin-bottom: 1.2vh;
+    }
+    #logoheader-mapfre{
+        max-width:90%;
+    }
+    #logoheader-corretora{
+        max-width:90%;
+    }
+    #iconheader-whatsapp{
+        width:5vw;
+    }
+    .form .form-check-label {
+        color: #000000 !important;
+        font-size: 2.868vw !important;
+        margin-bottom: 3vh;
+    }
+    .btn-mapfre {
+        background: #D81E06;
+        border-radius: 5px;
+        padding: 1vw;
+        width: 100%;
+        border: none;
+        color: #ffffff;
+        font-size: 3.667vw;
+    }
+    #s1 {
+        width: 100%;
+        overflow: hidden;
+        align-content: center;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
+        background-position: left !important;
+        padding: 5vh 8vw;
+    }
+    #s3 .col-md-8 {
+        padding: 10vw 8vw;
+    }
+    #s2 h2 {
+        font-size: 5.333vw;
+        width: 80%;
+        margin-left: 10%;
+        margin-bottom: 6vh;
+    }
+    #s2 p {
+        color: #7C8995;
+        font-size: 3.667vw;
+        font-weight: 400;
+        margin: 1.389vw 0;
+        width: 83%;
+        margin-left: 8.5%;
+    }
+    #s2 .col{
+        width:50%;
+        float:left;
+        flex:unset;
+        margin-bottom:2vh;
+    }
+    #s2 h4 {
+        font-size: 4.778vw;
+        font-weight: 500;
+        margin: 1.389vw 0;
+    }
+    #s2 p {
+        color: #7C8995;
+        font-size: 5.067vw;
+        font-weight: 400;
+        margin: 1.389vw 0;
+        width: 100%;
+    }
+    #s2 .btn-mapfre {
+        width: 100%;
+        margin: 3vh 0;
+    }
+    #s3 h3 {
+        font-size: 5.333vw;
+    }
+    #s3 .col-10 {
+        font-size: 3.111vw;
+        margin-top: 3vh;
+    }
+    #s3 .btn-mapfre {
+        width:100%;
+        margin: 5vh 0;
+    }
+    #logofooter-mapfre{
+        width:30%;
+        float:left;
+    }
+    #logofooter-corretora{
+        width:30%;
+        float:right;
+    }
+    footer p {
+        font-size: 3.267vw;
+        margin-top: 2vh !important;
+        text-align:center;
+    }
+}

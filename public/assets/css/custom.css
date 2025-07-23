@@ -1,0 +1,14 @@
+/* #D81E05 */
+
+@media (min-width: 992px){
+    .header .header-top {
+        height: 70px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+        align-items: stretch;
+        background-color: #0144E4 !important;
+    }
+}
