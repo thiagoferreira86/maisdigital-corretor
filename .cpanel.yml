@@ -1,0 +1,7 @@
+---
+deployment:
+  tasks:
+    - /bin/echo "Deploy iniciado em $(date)"
+    - export DEST=/home/mapfrecorretor/public_html/dev
+    - /bin/rsync -av --exclude='.git' --exclude='.cpanel.yml' ./ $DEST
+    - /bin/echo "Deploy concluído em $(date)"
