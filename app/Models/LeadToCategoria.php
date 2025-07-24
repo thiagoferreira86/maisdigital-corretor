@@ -1,17 +1,18 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class LeadToCategoria extends ActiveRecord {
 
-	public $id;
-	public $lead;
-	public $categoria;
-	public $corretora;
+	public string $id;
+	public string $lead;
+	public string $categoria;
+	public string $corretora;
     
-    public function getTable() {
-        return 'OTIMIZEleadsToCategorias';
+    public function getTable(): string {
+        return 'MDM_leadsToCategorias';
     }
     
     public static function campo($id, $campo){
@@ -26,7 +27,7 @@ class LeadToCategoria extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEleadsToCategorias','LeadToCategoria',$conditions,$order);
+		$result = self::load('MDM_leadsToCategorias','LeadToCategoria',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

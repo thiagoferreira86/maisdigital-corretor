@@ -1,42 +1,43 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class EmailsMarketing extends ActiveRecord {
 
-	public $id;
-	public $template;
-	public $corretora;
-	public $titulo;
-	public $url;
-	public $conteudo;
-	public $rota;
-	public $meta_description;
-	public $meta_keywords;
-	public $principal;
-	public $pasta;
-	public $referencia;
-	public $head;
-	public $footer;
-	public $status; // Ativo / Inativo
-	public $data_cadastro;
-	public $cor_primaria;
-	public $cor_secundaria;
-	public $logotipo;
-	public $link_logotipo;
-	public $imagem;
-	public $link_imagem;
-	public $texto;
-	public $cor_texto;
-	public $texto_botao;
-	public $cor_botao;
-	public $cor_texto_botao;
-	public $link_botao;
-	public $data_update;
+	public string $id;
+	public string $template;
+	public string $corretora;
+	public string $titulo;
+	public string $url;
+	public string $conteudo;
+	public string $rota;
+	public string $meta_description;
+	public string $meta_keywords;
+	public string $principal;
+	public string $pasta;
+	public string $referencia;
+	public string $head;
+	public string $footer;
+	public string $status; // Ativo / Inativo
+	public string $data_cadastro;
+	public string $cor_primaria;
+	public string $cor_secundaria;
+	public string $logotipo;
+	public string $link_logotipo;
+	public string $imagem;
+	public string $link_imagem;
+	public string $texto;
+	public string $cor_texto;
+	public string $texto_botao;
+	public string $cor_botao;
+	public string $cor_texto_botao;
+	public string $link_botao;
+	public string $data_update;
 
-    public function getTable() {
-        return 'OTIMIZEemailsMarketing';
+    public function getTable(): string {
+        return 'MDM_emailsMarketing';
     }
     
     public static function campo($id, $campo){
@@ -60,7 +61,7 @@ class EmailsMarketing extends ActiveRecord {
 	}
 	public static function find($id = 0, $conditions = null, $order = 'id ASC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEemailsMarketing','EmailsMarketing',$conditions,$order);
+		$result = self::load('MDM_emailsMarketing','EmailsMarketing',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

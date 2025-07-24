@@ -1,24 +1,25 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Lead extends ActiveRecord {
 
-	public $id;
-	public $nome;
-	public $email;
-	public $telefone;
-	public $mensagem;
-	public $origem;
-	public $data_cadastro;
-	public $observacoes;
-	public $corretora;
-	public $csv;
-	public $descricao;
+	public string $id;
+	public string $nome;
+	public string $email;
+	public string $telefone;
+	public string $mensagem;
+	public string $origem;
+	public string $data_cadastro;
+	public string $observacoes;
+	public string $corretora;
+	public string $csv;
+	public string $descricao;
     
-    public function getTable() {
-        return 'OTIMIZEleads';
+    public function getTable(): string {
+        return 'MDM_leads';
     }
     
     public function save() {
@@ -33,7 +34,7 @@ class Lead extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEleads','Lead',$conditions,$order);
+		$result = self::load('MDM_leads','Lead',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

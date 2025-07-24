@@ -1,17 +1,18 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class LeadHistorico extends ActiveRecord {
 
-	public $id;
-	public $lead;
-	public $descricao;
-    public $data_cadastro;
+	public string $id;
+	public string $lead;
+	public string $descricao;
+    public string $data_cadastro;
     
-    public function getTable() {
-        return 'OTIMIZEleadsHistorico';
+    public function getTable(): string {
+        return 'MDM_leadsHistorico';
     }
     
     public function save() {
@@ -31,7 +32,7 @@ class LeadHistorico extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEleadsHistorico','LeadHistorico',$conditions,$order);
+		$result = self::load('MDM_leadsHistorico','LeadHistorico',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

@@ -1,20 +1,21 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class CampanhaTemplate extends ActiveRecord {
 
-	public $id;
-	public $nome;
-	public $corretora;
-	public $conteudo;
-	public $url;
-	public $status;
-	public $data_cadastro;
+	public string $id;
+	public string $nome;
+	public string $corretora;
+	public string $conteudo;
+	public string $url;
+	public string $status;
+	public string $data_cadastro;
     
-    public function getTable() {
-        return 'OTIMIZEcampanhasTemplates';
+    public function getTable(): string {
+        return 'MDM_campanhasTemplates';
     }
     
      public function save() {
@@ -34,7 +35,7 @@ class CampanhaTemplate extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'nome ASC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEcampanhasTemplates','CampanhaTemplate',$conditions,$order);
+		$result = self::load('MDM_campanhasTemplates','CampanhaTemplate',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

@@ -1,20 +1,21 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class EmailsMarketingVariaveis extends ActiveRecord {
 
-	public $id;
-	public $email;
-	public $tipo;
-	public $conteudo;
-	public $referencia;
-	public $imagem;
-	public $ordem;
+	public string $id;
+	public string $email;
+	public string $tipo;
+	public string $conteudo;
+	public string $referencia;
+	public string $imagem;
+	public string $ordem;
     
-    public function getTable() {
-        return 'OTIMIZEemailsMarketingVariaveis';
+    public function getTable(): string {
+        return 'MDM_emailsMarketingVariaveis';
     }
     
 	public function save() {
@@ -28,7 +29,7 @@ class EmailsMarketingVariaveis extends ActiveRecord {
 	
 	public static function find($id = 0, $conditions = null, $order = 'id ASC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEemailsMarketingVariaveis','EmailsMarketingVariaveis',$conditions,$order);
+		$result = self::load('MDM_emailsMarketingVariaveis','EmailsMarketingVariaveis',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

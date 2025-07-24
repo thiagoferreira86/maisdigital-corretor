@@ -10,6 +10,8 @@
   "require": {
     "vlucas/phpdotenv": "^5.5",
     "phpmailer/phpmailer": "^6.10",
-    "mobiledetect/mobiledetectlib": "^3.74"
+    "mobiledetect/mobiledetectlib": "^3.74",
+    "ua-parser/uap-php": "dev-master",
+    "minishlink/web-push": "^7.0"
   }
 }

@@ -1,48 +1,49 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Landing extends ActiveRecord {
 
-	public $id;
-	public $template;
-	public $nome;
-	public $corretora;
-	public $titulo;
-	public $url;
-	public $conteudo;
-	public $route;
-	public $descricao;
-	public $favicon;
-	public $tipo;
-	public $tagsHead;
-	public $status;
-	public $data_cadastro;
-	public $data_update;
-	public $tagsBody;
-	public $logotipo;
-	public $cor_primaria;
-	public $cor_secundaria;
-	public $cor_terciaria;
-	public $cor_quaternaria;
-	public $cor_quinaria;
-	public $cor_senaria;
-	public $redirecionamento;
-	public $telefone;
-	public $whatsapp;
-	public $email;
-	public $facebook;
-	public $instagram;
-	public $twitter;
-	public $linkedin;
-	public $endereco;
-	public $referencia;
-	public $pasta;
-	public $logotipo_footer;
+	public string $id;
+	public string $template;
+	public string $nome;
+	public string $corretora;
+	public string $titulo;
+	public string $url;
+	public string $conteudo;
+	public string $route;
+	public string $descricao;
+	public string $favicon;
+	public string $tipo;
+	public string $tagsHead;
+	public string $status;
+	public string $data_cadastro;
+	public string $data_update;
+	public string $tagsBody;
+	public string $logotipo;
+	public string $cor_primaria;
+	public string $cor_secundaria;
+	public string $cor_terciaria;
+	public string $cor_quaternaria;
+	public string $cor_quinaria;
+	public string $cor_senaria;
+	public string $redirecionamento;
+	public string $telefone;
+	public string $whatsapp;
+	public string $email;
+	public string $facebook;
+	public string $instagram;
+	public string $twitter;
+	public string $linkedin;
+	public string $endereco;
+	public string $referencia;
+	public string $pasta;
+	public string $logotipo_footer;
 
-    public function getTable() {
-        return 'OTIMIZElandings';
+    public function getTable(): string {
+        return 'MDM_landings';
     }
     
     public static function campo($id, $campo){
@@ -66,7 +67,7 @@ class Landing extends ActiveRecord {
 	}
 	public static function find($id = 0, $conditions = null, $order = 'id ASC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZElandings','Landing',$conditions,$order);
+		$result = self::load('MDM_landings','Landing',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

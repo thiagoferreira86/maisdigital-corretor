@@ -1,20 +1,21 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Admin extends ActiveRecord {
 
-	public $id;
-	public $nome;
-	public $email;
-	public $telefone;
-	public $senha;
-	public $data_cadastro;
-	public $imagem;
+	public string $id;
+	public string $nome;
+	public string $email;
+	public string $telefone;
+	public string $senha;
+	public string $data_cadastro;
+	public string $imagem;
 
-	public function getTable(){
-        return 'OTIMIZEadministradores';
+	public function getTable(): string{
+        return 'MDM_administradores';
     }
 
 	public function save() {
@@ -30,7 +31,7 @@ class Admin extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'nome ASC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEadministradores','Admin',$conditions,$order);
+		$result = self::load('MDM_administradores','Admin',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

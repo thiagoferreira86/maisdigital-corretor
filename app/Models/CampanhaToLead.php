@@ -1,16 +1,17 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class CampanhaToLead extends ActiveRecord {
 
-	public $id;
-	public $campanha;
-	public $lead;
+	public string $id;
+	public string $campanha;
+	public string $lead;
     
-    public function getTable() {
-        return 'OTIMIZEcampanhasToLeads';
+    public function getTable(): string {
+        return 'MDM_campanhasToLeads';
     }
     
     public static function campo($id, $campo){
@@ -25,7 +26,7 @@ class CampanhaToLead extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEcampanhasToLeads','CampanhaToLead',$conditions,$order);
+		$result = self::load('MDM_campanhasToLeads','CampanhaToLead',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

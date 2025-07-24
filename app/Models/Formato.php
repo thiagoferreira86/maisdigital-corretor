@@ -1,18 +1,19 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Formato extends ActiveRecord {
 
-	public $id;
-	public $nome;
-	public $tipo;
-	public $width;
-	public $height;
+	public string $id;
+	public string $nome;
+	public string $tipo;
+	public string $width;
+	public string $height;
     
-    public function getTable() {
-        return 'OTIMIZEformatos';
+    public function getTable(): string {
+        return 'MDM_formatos';
     }
     
     public static function campo($id, $campo){
@@ -28,7 +29,7 @@ class Formato extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEformatos','Formato',$conditions,$order);
+		$result = self::load('MDM_formatos','Formato',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

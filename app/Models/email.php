@@ -1,21 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Email extends ActiveRecord {
 
-	public $id;
-	public $email;
-	public $senha;
-	public $armazenamento;
-	public $corretora;
-	public $conta;
-	public $assinatura;
-	public $email_recuperacao;
+	public string $id;
+	public string $email;
+	public string $senha;
+	public string $armazenamento;
+	public string $corretora;
+	public string $conta;
+	public string $assinatura;
+	public string $email_recuperacao;
     
-    public function getTable() {
-        return 'OTIMIZEemails';
+    public function getTable(): string {
+        return 'MDM_emails';
     }
     
     public function save() {
@@ -43,7 +44,7 @@ class Email extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEemails','Email',$conditions,$order);
+		$result = self::load('MDM_emails','Email',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

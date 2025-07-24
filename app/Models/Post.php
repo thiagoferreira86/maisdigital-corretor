@@ -1,23 +1,24 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Post extends ActiveRecord {
 
-	public $id;
-	public $titulo;
-	public $subtitulo;
-	public $capa;
-	public $imagem;
-	public $texto;
-	public $status;
-	public $url;
-	public $data_cadastro;
-	public $views;
+	public string $id;
+	public string $titulo;
+	public string $subtitulo;
+	public string $capa;
+	public string $imagem;
+	public string $texto;
+	public string $status;
+	public string $url;
+	public string $data_cadastro;
+	public string $views;
     
-    public function getTable() {
-        return 'OTIMIZEposts';
+    public function getTable(): string {
+        return 'MDM_posts';
     }
     
     public static function campo($id, $campo){
@@ -38,13 +39,13 @@ class Post extends ActiveRecord {
 	}
 	
 	public static function visto($id) {
-		$obj = self::add('OTIMIZEposts', $id, 'views');
+		$obj = self::add('MDM_posts', $id, 'views');
 		return true;
 	}
 
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEposts','Post',$conditions,$order);
+		$result = self::load('MDM_posts','Post',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

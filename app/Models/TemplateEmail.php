@@ -1,21 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class TemplateEmail extends ActiveRecord {
 
-	public $id;
-	public $nome;
-	public $imagem;
-	public $pasta;
-	public $tipo; // sites // emails // landingpages
-	public $status;
-	public $conteudo;
-    public $referencia;
+	public string $id;
+	public string $nome;
+	public string $imagem;
+	public string $pasta;
+	public string $tipo; // sites // emails // landingpages
+	public string $status;
+	public string $conteudo;
+    public string $referencia;
     
-    public function getTable() {
-        return 'OTIMIZEtemplatesEmails';
+    public function getTable(): string {
+        return 'MDM_templatesEmails';
     }
     
 	public function save() {
@@ -33,7 +34,7 @@ class TemplateEmail extends ActiveRecord {
 	}
 	public static function find($id = 0, $conditions = null, $order = 'nome ASC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEtemplatesEmails','TemplateEmail',$conditions,$order);
+		$result = self::load('MDM_templatesEmails','TemplateEmail',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

@@ -1,15 +1,16 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Tema extends ActiveRecord {
 
-	public $id;
-	public $nome;
+	public string $id;
+	public string $nome;
     
-    public function getTable() {
-        return 'OTIMIZEtemas';
+    public function getTable(): string {
+        return 'MDM_temas';
     }
     
     public static function campo($id, $campo){
@@ -25,7 +26,7 @@ class Tema extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEtemas','Tema',$conditions,$order);
+		$result = self::load('MDM_temas','Tema',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

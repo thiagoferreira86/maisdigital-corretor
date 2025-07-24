@@ -1,21 +1,22 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Material extends ActiveRecord {
 
-	public $id;
-	public $titulo;
-	public $descricao;
-	public $arquivo;
-	public $status;
-	public $data_cadastro;
-	public $url;
-	public $views;
+	public string $id;
+	public string $titulo;
+	public string $descricao;
+	public string $arquivo;
+	public string $status;
+	public string $data_cadastro;
+	public string $url;
+	public string $views;
     
-    public function getTable() {
-        return 'OTIMIZEmateriais';
+    public function getTable(): string {
+        return 'MDM_materiais';
     }
     
     public static function campo($id, $campo){
@@ -36,13 +37,13 @@ class Material extends ActiveRecord {
 	}
 	
 	public static function visto($id) {
-		$obj = self::add('OTIMIZEmateriais', $id, 'views');
+		$obj = self::add('MDM_materiais', $id, 'views');
 		return true;
 	}
 
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEmateriais','Material',$conditions,$order);
+		$result = self::load('MDM_materiais','Material',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

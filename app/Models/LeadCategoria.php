@@ -1,16 +1,17 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class LeadCategoria extends ActiveRecord {
 
-	public $id;
-	public $nome;
-	public $corretora;
+	public string $id;
+	public string $nome;
+	public string $corretora;
     
-    public function getTable() {
-        return 'OTIMIZEleadsCategorias';
+    public function getTable(): string {
+        return 'MDM_leadsCategorias';
     }
     
     public static function campo($id, $campo){
@@ -25,7 +26,7 @@ class LeadCategoria extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'nome ASC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEleadsCategorias','LeadCategoria',$conditions,$order);
+		$result = self::load('MDM_leadsCategorias','LeadCategoria',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

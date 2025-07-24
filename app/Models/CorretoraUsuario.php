@@ -8,28 +8,17 @@ class CorretoraUsuario extends ActiveRecord
     public int $corretora_id;
     public string $nome;
     public string $email;
-    public int $cpf;
+    public string $cpf;
     public ?string $telefone = null;
-    public ?string $whatsapp = null;
-    public ?string $categoria = null;
-    public ?string $cep = null;
-    public ?string $endereco = null;
-    public ?string $numero = null;
-    public ?string $complemento = null;
-    public ?string $bairro = null;
-    public ?string $cidade = null;
-    public ?string $estado = null;
-    public ?string $codigo = null;
-    public ?string $pasta = null;
     public ?string $token = null;
     public ?string $status = null;
-    public ?string $logotipo = null;
+    public ?string $recovery = null;
     public ?string $data_atualizacao = null;
     public ?string $data_cadastro = null;
     public ?string $data_ultimo_acesso = null;
     public ?string $excluido = null;
     public ?string $senha = null; // adicionada para uso no save()
-
+    
     public function getTable(): string
     {
         return 'MDM_corretoras_usuarios';
@@ -66,7 +55,9 @@ class CorretoraUsuario extends ActiveRecord
         if (!empty($this->senha) && !preg_match('/^\\$2y\\$/', $this->senha)) {
             $this->senha = password_hash($this->senha, PASSWORD_DEFAULT);
         }
-
+        if (empty($this->token)) {
+           $this->token = self::gerarToken(64);
+        }
         return parent::save();
     }
     
@@ -83,16 +74,10 @@ class CorretoraUsuario extends ActiveRecord
         return null; // senha incorreta
     }
 
-    public static function last(): ?self
-    {
-        $last = self::find(0, null, 'id DESC LIMIT 1');
-        return $last[0] ?? null;
-    }
-
     public static function find(int|string $id = 0, ?array $conditions = null, string $order = 'nome ASC'): mixed
     {
         $conditions = self::treatConditions($id, $conditions);
-        $result = self::load(self::getTable(), static::class, $conditions, $order);
+        $result = self::load('MDM_corretoras_usuarios', static::class, $conditions, $order);
 
         if (!empty($id)) {
             return $result[0] ?? null;

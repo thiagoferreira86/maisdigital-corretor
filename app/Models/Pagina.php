@@ -1,26 +1,27 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Pagina extends ActiveRecord {
 
-	public $id;
-	public $site;
-	public $titulo;
-	public $url;
-	public $conteudo;
-	public $rota;
-	public $meta_description;
-	public $meta_keywords;
-	public $principal;
-	public $head;
-	public $footer;
-	public $status; // Ativo / Inativo
-	public $data_cadastro;
+	public string $id;
+	public string $site;
+	public string $titulo;
+	public string $url;
+	public string $conteudo;
+	public string $rota;
+	public string $meta_description;
+	public string $meta_keywords;
+	public string $principal;
+	public string $head;
+	public string $footer;
+	public string $status; // Ativo / Inativo
+	public string $data_cadastro;
 
-    public function getTable() {
-        return 'OTIMIZEpaginas';
+    public function getTable(): string {
+        return 'MDM_paginas';
     }
     
 	public function save() {
@@ -38,7 +39,7 @@ class Pagina extends ActiveRecord {
 	}
 	public static function find($id = 0, $conditions = null, $order = 'id ASC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEpaginas','Pagina',$conditions,$order);
+		$result = self::load('MDM_paginas','Pagina',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

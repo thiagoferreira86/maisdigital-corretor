@@ -19,6 +19,9 @@
         <script src="https://www.google.com/recaptcha/api.js?render=<?=RECAPTCHA_SITEKEY?>"></script>
 		<!--end::Global Theme Styles-->
         <link rel="shortcut icon" href="<?=FAVICON?>" />
+        <script>
+            let recaptcha_sitekey = '<?=RECAPTCHA_SITEKEY?>';
+        </script>
 		<style>
         	.box-cookies.hide {
                 display: none !important;

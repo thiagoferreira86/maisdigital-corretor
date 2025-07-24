@@ -1,18 +1,19 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class SecutiryLog extends ActiveRecord {
 
-	public $id;
-	public $origem;
-	public $ip;
-	public $data_cadastro;
-	public $detalhes;
+	public string $id;
+	public string $origem;
+	public string $ip;
+	public string $data_cadastro;
+	public string $detalhes;
     
-    public function getTable() {
-        return 'OTIMIZEsecurity_logs';
+    public function getTable(): string {
+        return 'MDM_security_logs';
     }
     
     public function save() {
@@ -27,7 +28,7 @@ class SecutiryLog extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEsecurity_logs','SecutiryLog',$conditions,$order);
+		$result = self::load('MDM_security_logs','SecutiryLog',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

@@ -1,22 +1,23 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Csv extends ActiveRecord {
 
-	public $id;
-	public $corretora;
-	public $arquivo;
-	public $leads;
-	public $data_cadastro;
-	public $json;
-	public $erros;
-	public $repetidos;
-	public $salvos;
+	public string $id;
+	public string $corretora;
+	public string $arquivo;
+	public string $leads;
+	public string $data_cadastro;
+	public string $json;
+	public string $erros;
+	public string $repetidos;
+	public string $salvos;
 
-    public function getTable() {
-        return 'OTIMIZEcsv';
+    public function getTable(): string {
+        return 'MDM_csv';
     }
     
     public static function atualiza($id, $campo, $valor){
@@ -46,7 +47,7 @@ class Csv extends ActiveRecord {
 	
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEcsv','Csv',$conditions,$order);
+		$result = self::load('MDM_csv','Csv',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

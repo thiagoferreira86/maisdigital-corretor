@@ -1,42 +1,43 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class TemplateLandingpage extends ActiveRecord {
 
-	public $id;
-	public $nome;
-	public $imagem;
-	public $pasta;
-	public $route;
-	public $status;
-	public $conteudo;
-	public $facebook;
-	public $instagram;
-	public $linkedin;
-	public $twitter;
-	public $telefone;
-	public $email;
-	public $logotipo;
-	public $titulo;
-	public $descricao;
-	public $tipo;
-	public $whatsapp;
-	public $endereco;
-	public $favicon;
-	public $tagsHead;
-	public $tagsBody;
-	public $cor_primaria;
-	public $cor_secundaria;
-	public $cor_terciaria;
-	public $cor_quaternaria;
-	public $cor_quinaria;
-	public $cor_senaria;
-    public $logotipo_footer;
+	public string $id;
+	public string $nome;
+	public string $imagem;
+	public string $pasta;
+	public string $route;
+	public string $status;
+	public string $conteudo;
+	public string $facebook;
+	public string $instagram;
+	public string $linkedin;
+	public string $twitter;
+	public string $telefone;
+	public string $email;
+	public string $logotipo;
+	public string $titulo;
+	public string $descricao;
+	public string $tipo;
+	public string $whatsapp;
+	public string $endereco;
+	public string $favicon;
+	public string $tagsHead;
+	public string $tagsBody;
+	public string $cor_primaria;
+	public string $cor_secundaria;
+	public string $cor_terciaria;
+	public string $cor_quaternaria;
+	public string $cor_quinaria;
+	public string $cor_senaria;
+    public string $logotipo_footer;
     
-    public function getTable() {
-        return 'OTIMIZEtemplatesLandingpages';
+    public function getTable(): string {
+        return 'MDM_templatesLandingpages';
     }
     
 	public function save() {
@@ -50,7 +51,7 @@ class TemplateLandingpage extends ActiveRecord {
 	}
 	public static function find($id = 0, $conditions = null, $order = 'nome ASC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEtemplatesLandingpages','TemplateLandingpage',$conditions,$order);
+		$result = self::load('MDM_templatesLandingpages','TemplateLandingpage',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

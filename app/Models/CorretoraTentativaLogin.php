@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Models;
+
 class CorretoraTentativaLogin extends ActiveRecord {
     
     public ?int $id = null;
@@ -47,7 +49,7 @@ class CorretoraTentativaLogin extends ActiveRecord {
     
     public static function find(int $id = 0, ?array $conditions = null, string $order = 'id DESC'): array|static|null {
         $conditions = self::treatConditions($id, $conditions);
-        $result = self::load(self::getTable(), static::class, $conditions, $order);
+        $result = self::load('MDM_corretoras_tentativas_login', static::class, $conditions, $order);
 
         if ($id !== 0) {
             return $result[0] ?? null;

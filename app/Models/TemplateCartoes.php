@@ -1,35 +1,36 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class TemplateCartoes extends ActiveRecord {
 
-	public $id;
-	public $nome;
-	public $imagem;
-	public $pasta;
-	public $route;
-	public $status;
-	public $conteudo;
-	public $facebook;
-	public $instagram;
-	public $linkedin;
-	public $twitter;
-	public $telefone;
-	public $email;
-	public $logotipo;
-	public $titulo;
-	public $descricao;
-	public $tipo;
-	public $whatsapp;
-	public $endereco;
-	public $favicon;
-	public $tagsHead;
-	public $tagsBody;
+	public string $id;
+	public string $nome;
+	public string $imagem;
+	public string $pasta;
+	public string $route;
+	public string $status;
+	public string $conteudo;
+	public string $facebook;
+	public string $instagram;
+	public string $linkedin;
+	public string $twitter;
+	public string $telefone;
+	public string $email;
+	public string $logotipo;
+	public string $titulo;
+	public string $descricao;
+	public string $tipo;
+	public string $whatsapp;
+	public string $endereco;
+	public string $favicon;
+	public string $tagsHead;
+	public string $tagsBody;
     
-    public function getTable() {
-        return 'OTIMIZEtemplatesCartoes';
+    public function getTable(): string {
+        return 'MDM_templatesCartoes';
     }
     
 	public function save() {
@@ -41,7 +42,7 @@ class TemplateCartoes extends ActiveRecord {
 	}
 	public static function find($id = 0, $conditions = null, $order = 'nome ASC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEtemplatesCartoes','TemplateCartoes',$conditions,$order);
+		$result = self::load('MDM_templatesCartoes','TemplateCartoes',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

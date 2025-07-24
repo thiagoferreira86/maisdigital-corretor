@@ -1,17 +1,18 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Visita extends ActiveRecord {
 
-	public $id;
-	public $site;
-	public $data_cadastro;
-	public $landing;
+	public string $id;
+	public string $site;
+	public string $data_cadastro;
+	public string $landing;
     
-    public function getTable() {
-        return 'OTIMIZEvisitas';
+    public function getTable(): string {
+        return 'MDM_visitas';
     }
     
     public function save() {
@@ -26,7 +27,7 @@ class Visita extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEvisitas','Visita',$conditions,$order);
+		$result = self::load('MDM_visitas','Visita',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

@@ -5,13 +5,13 @@ namespace App\Models;
 class Corretora extends ActiveRecord
 {
     public int $id;
-    public string $nome_fantasia;
+    public string $nome;
     public string $razao;
     public string $email;
     public string $cpf_cnpj;
     public ?string $telefone = null;
     public ?string $whatsapp = null;
-    public ?string $categoria = null;
+    public ?string $categoria_id = null;
     public ?string $cep = null;
     public ?string $endereco = null;
     public ?string $numero = null;
@@ -28,7 +28,6 @@ class Corretora extends ActiveRecord
     public ?string $data_cadastro = null;
     public ?string $data_ultimo_acesso = null;
     public ?string $excluido = null;
-    public ?string $senha = null; // adicionada para uso no save()
 
     public function getTable(): string
     {
@@ -62,9 +61,13 @@ class Corretora extends ActiveRecord
         if (empty($this->status)) {
             $this->status = 'Ativo';
         }
+        
+        if (empty($this->excluido)) {
+            $this->excluido = 'n';
+        }
 
-        if (!empty($this->senha) && !preg_match('/^\\$2y\\$/', $this->senha)) {
-            $this->senha = password_hash($this->senha, PASSWORD_DEFAULT);
+        if (empty($this->token)) {
+           $this->token = self::gerarToken(64);
         }
 
         return parent::save();
@@ -73,7 +76,7 @@ class Corretora extends ActiveRecord
     public static function find(int|string $id = 0, ?array $conditions = null, string $order = 'nome ASC'): mixed
     {
         $conditions = self::treatConditions($id, $conditions);
-        $result = self::load(self::getTable(), static::class, $conditions, $order);
+        $result = self::load('MDM_corretoras', static::class, $conditions, $order);
 
         if (!empty($id)) {
             return $result[0] ?? null;

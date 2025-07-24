@@ -1,19 +1,20 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Notificacao extends ActiveRecord {
 
-	public $id;
-	public $corretor;
-	public $tipo;
-	public $mensagem;
-	public $lida;
-	public $data_cadastro;
-	public $admin;
+	public string $id;
+	public string $corretor;
+	public string $tipo;
+	public string $mensagem;
+	public string $lida;
+	public string $data_cadastro;
+	public string $admin;
     
-    public function getTable() {
+    public function getTable(): string {
         return 'PROnotificacoes';
     }
     

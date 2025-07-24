@@ -2,26 +2,28 @@
 
 namespace App\Models;
 
+use \DateTime;
 
 class Log extends ActiveRecord {
 
 	public $id;
-	public $corretora;
+	public $corretora_id;
+	public $usuario_id;
 	public $ip;
 	public $data_cadastro;
 	public $acao;
     
-    public function getTable() {
-        return 'OTIMIZElogs';
+    public function getTable(): string {
+        return 'MDM_logs';
     }
     
-    public function save() {
+    public function save(): bool {
         if(empty($this->data_cadastro)) $this->data_cadastro = date("Y-m-d H:i:s");
 		return parent::save();
 	}
 	
 	public static function totalAcessos($limite = 10, $order = 'DESC') {
-		$result = self::countAcessos('Log', $order, 'OTIMIZElogs', $limite);
+		$result = self::countAcessos('Log', $order, 'MDM_logs', $limite);
 		return $result;
 	}
 	
@@ -31,17 +33,17 @@ class Log extends ActiveRecord {
 	        for($i=0; $i<24; $i++){
 	            $horario_inicial = date("Y-m-d ".str_pad($i, 2, "0", STR_PAD_LEFT).":00:00");
 	            $horario_final = date("Y-m-d ".str_pad($i, 2, "0", STR_PAD_LEFT).":59:59");
-	            $obj = Sessao::find(0, array("data_cadastro BETWEEN '".$horario_inicial."' AND '".$horario_final."'"), "id ASC");
+	            $obj = CorretoraSessao::find(0, array("data_cadastro BETWEEN '".$horario_inicial."' AND '".$horario_final."'"), "id ASC");
 	            array_push($data, count($obj));
 	        }
 	    } elseif($param == 's'){
 	        $mes = date("m-Y");
-            $obj = Sessao::find(0, array("data_cadastro LIKE '%".$mes."%'"), "id ASC", "corretora");
+            $obj = CorretoraSessao::find(0, array("data_cadastro LIKE '%".$mes."%'"), "id ASC", "corretora");
             array_push($data, count($obj));
             for($i=5; $i>0; $i--){
                 $date = new DateTime('-'.$i.' month');
                 $mes = $date->format('m-Y').'<br>';
-                $obj = Sessao::find(0, array("data_cadastro LIKE '%".$mes."%'"), "id ASC", "corretora");
+                $obj = CorretoraSessao::find(0, array("data_cadastro LIKE '%".$mes."%'"), "id ASC", "corretora");
                 array_push($data, count($obj));
             }
 	    } elseif($param == 'm'){
@@ -52,13 +54,13 @@ class Log extends ActiveRecord {
                 $date = new DateTime('-'.$i.' month');
                 $mes = $date->format('Y-m');
                 $mes_formatado = $date->format('m/Y');
-                $obj = Sessao::find(0, array("data_cadastro LIKE '%".$mes."%'"), "id ASC");
+                $obj = CorretoraSessao::find(0, array("data_cadastro LIKE '%".$mes."%'"), "id ASC");
                 array_push($data['values'], count($obj));
                 array_push($data['meses'], mesAbrv($mes_formatado));
             }
             $mes = date("Y-m");
             $mes_formatado = date('m/Y');
-            $obj = Sessao::find(0, array("data_cadastro LIKE '%".$mes."%'"), "id ASC");
+            $obj = CorretoraSessao::find(0, array("data_cadastro LIKE '%".$mes."%'"), "id ASC");
             array_push($data['meses'], mesAbrv($mes_formatado));
             array_push($data['values'], count($obj));
             
@@ -69,8 +71,9 @@ class Log extends ActiveRecord {
 	
 	public static function grava($acao) {
         $obj = new Log();
-        $obj->corretora = $_SESSION['corretora_id'];
-        $obj->ip = $_SERVER['REMOTE_ADDR'];
+        $obj->corretora_id = $_SESSION['corretora_id'];
+        $obj->usuario_id = $_SESSION['corretora_usuario_id'];
+        $obj->ip = getUserIP();
         $obj->acao = $acao;
         $obj->save();
 	}
@@ -80,18 +83,18 @@ class Log extends ActiveRecord {
 		return $last[0];
 	}
 
-	public static function find($id = 0, $conditions = null, $order = 'id DESC', $group = null) {
+    public static function find(int $id = 0, ?array $conditions = null, string $order = 'id DESC'): mixed {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZElogs','Log',$conditions,$order, $group);
+		$result = self::load('MDM_logs','Log',$conditions,$order, $group);
 
 		if(!empty($id))
 			$result = $result[0];
 		return $result;
 	}
 
-	public static function paginate($page,$quantity,$conditions="0=0",$order='id DESC') {
-		return self::find(0,array($conditions),$order. " LIMIT ".($page*$quantity).",$quantity");
-	}
+	public static function paginate(int $page, int $quantity, string $conditions = "0=0", string $order = 'id DESC'): array {
+        return self::find(0, [$conditions], $order . " LIMIT " . ($page * $quantity) . ",$quantity");
+    }
 
 }
 

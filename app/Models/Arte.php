@@ -1,63 +1,69 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
+class Arte extends ActiveRecord
+{
+    public ?int $id = null;
+    public string $nome = '';
+    public string $formato = '';
+    public string $tipo = '';
+    public string $imagem = '';
+    public string $tema = '';
+    public string $status = '';
+    public ?string $logox = null;
+    public ?string $logoy = null;
+    public ?string $whatsappx = null;
+    public ?string $whatsappy = null;
+    public ?string $data_cadastro = null;
+    public int $downloads = 0;
+    public ?string $disclamimer_x = null;
+    public ?string $disclamimer_y = null;
 
-class Arte extends ActiveRecord {
-
-	public $id;
-	public $nome;
-	public $formato;
-	public $tipo;
-	public $imagem;
-	public $tema;
-	public $status;
-	public $logox;
-	public $logoy;
-	public $whatsappx;
-	public $whatsappy;
-	public $data_cadastro;
-	public $downloads;
-	public $disclamimer_x;
-	public $disclamimer_y;
-    
-    public function getTable() {
-        return 'OTIMIZEartes';
+    public function getTable(): string
+    {
+        return 'MDM_artes';
     }
-    
-    public static function campo($id, $campo){
+
+    public static function campo(int $id, string $campo): mixed
+    {
         $result = self::find($id);
-        return $result->{$campo};
+        return $result->{$campo} ?? null;
     }
-    
-    public static function download($id) {
-		$obj = self::add(self::getTable(), $id, 'downloads');
-		return true;
-	}
-    
-    public function save() {
-        if(empty($this->data_cadastro)) $this->data_cadastro = date("Y-m-d H:i:s");
-		return parent::save();
-	}
-    
-	public static function last() {
-		$last = self::find(0,null,'id DESC LIMIT 1');
-		return $last[0];
-	}
 
-	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
-		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEartes','Arte',$conditions,$order);
+    public static function download(int $id): bool
+    {
+        self::add((new static())->getTable(), $id, 'downloads');
+        return true;
+    }
 
-		if(!empty($id))
-			$result = $result[0];
-		return $result;
-	}
+    public function save(): bool
+    {
+        if (empty($this->data_cadastro)) {
+            $this->data_cadastro = date("Y-m-d H:i:s");
+        }
+        return parent::save();
+    }
 
-	public static function paginate($page,$quantity,$conditions="0=0",$order='id DESC') {
-		return self::find(0,array($conditions),$order. " LIMIT ".($page*$quantity).",$quantity");
-	}
+    public static function last(): ?self
+    {
+        $last = self::find(0, null, 'id DESC LIMIT 1');
+        return $last[0] ?? null;
+    }
 
+    public static function find(int $id = 0, ?array $conditions = null, string $order = 'id DESC'): mixed
+    {
+        $conditions = self::treatConditions($id, $conditions);
+        $result = self::load('MDM_artes', self::class, $conditions, $order);
+
+        return $id > 0 ? ($result[0] ?? null) : $result;
+    }
+
+    public static function paginate(int $page, int $quantity, string $conditions = "0=0", string $order = 'id DESC'): array
+    {
+        $limit = sprintf('%d,%d', $page * $quantity, $quantity);
+        return self::find(0, [$conditions], "$order LIMIT $limit");
+    }
 }
-
-?>

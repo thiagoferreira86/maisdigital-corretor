@@ -1,40 +1,35 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
+class ArteTema extends ActiveRecord
+{
+    public ?int $id = null;
+    public string $nome = '';
 
-class ArteTema extends ActiveRecord {
-
-	public $id;
-	public $nome;
-    
-    public function getTable() {
-        return 'OTIMIZEartes_temas';
+    public function getTable(): string
+    {
+        return 'MDM_artes_temas';
     }
-    
-    public static function campo($id, $campo){
+
+    public static function campo(int $id, string $campo): mixed
+    {
         $result = self::find($id);
-        return $result->{$campo};
+        return $result->{$campo} ?? null;
     }
-    
-	public static function last() {
-		$last = self::find(0,null,'nome ASC LIMIT 1');
-		return $last[0];
-	}
 
-	public static function find($id = 0, $conditions = null, $order = 'nome ASC') {
-		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEartes_temas','ArteTema',$conditions,$order);
+    public static function find(int $id = 0, ?array $conditions = null, string $order = 'nome ASC'): mixed
+    {
+        $conditions = self::treatConditions($id, $conditions);
+        $result = self::load('MDM_artes_temas', 'ArteTema', $conditions, $order);
 
-		if(!empty($id))
-			$result = $result[0];
-		return $result;
-	}
+        return $id !== 0 ? ($result[0] ?? null) : $result;
+    }
 
-	public static function paginate($page,$quantity,$conditions="0=0",$order='nome ASC') {
-		return self::find(0,array($conditions),$order. " LIMIT ".($page*$quantity).",$quantity");
-	}
-
+    public static function paginate(int $page, int $quantity, string $conditions = "1=1", string $order = 'nome ASC'): array
+    {
+        $offset = $page * $quantity;
+        return self::find(0, [$conditions], "$order LIMIT $offset, $quantity");
+    }
 }
-
-?>

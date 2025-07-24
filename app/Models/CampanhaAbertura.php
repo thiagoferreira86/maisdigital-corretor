@@ -1,18 +1,19 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class CampanhaAbertura extends ActiveRecord {
 
-	public $id;
-	public $campanha;
-	public $lead;
-	public $url;
-	public $data_cadastro;
+	public string $id;
+	public string $campanha;
+	public string $lead;
+	public string $url;
+	public string $data_cadastro;
     
-    public function getTable() {
-        return 'OTIMIZEcampanhasAberturas';
+    public function getTable(): string {
+        return 'MDM_campanhasAberturas';
     }
     
      public function save() {
@@ -32,7 +33,7 @@ class CampanhaAbertura extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'id ASC', $group = null) {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEcampanhasAberturas','CampanhaAbertura',$conditions,$order,$group);
+		$result = self::load('MDM_campanhasAberturas','CampanhaAbertura',$conditions,$order,$group);
 
 		if(!empty($id))
 			$result = $result[0];

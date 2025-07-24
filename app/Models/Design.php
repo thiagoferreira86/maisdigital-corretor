@@ -1,20 +1,21 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Design extends ActiveRecord {
 
-	public $id;
-	public $nome;
-	public $formato;
-	public $tema;
-	public $trakto;
-	public $imagem;
-	public $data_cadastro;
+	public string $id;
+	public string $nome;
+	public string $formato;
+	public string $tema;
+	public string $trakto;
+	public string $imagem;
+	public string $data_cadastro;
     
-    public function getTable() {
-        return 'OTIMIZEdesigns';
+    public function getTable(): string {
+        return 'MDM_designs';
     }
     
     public function save() {
@@ -35,7 +36,7 @@ class Design extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEdesigns','Design',$conditions,$order);
+		$result = self::load('MDM_designs','Design',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

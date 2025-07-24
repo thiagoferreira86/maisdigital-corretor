@@ -1,29 +1,30 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class Campanha extends ActiveRecord {
 
-	public $id;
-	public $nome;
-	public $corretora;
-	public $data_envio;
-	public $conteudo;
-	public $data_cadastro;
-	public $status;
-	public $tipo;
-	public $facebook;
-	public $instagram;
-	public $twitter;
-	public $linkedin;
-	public $midia;
-	public $envios;
-	public $remetente;
-	public $remetente_nome;
+	public string $id;
+	public string $nome;
+	public string $corretora;
+	public string $data_envio;
+	public string $conteudo;
+	public string $data_cadastro;
+	public string $status;
+	public string $tipo;
+	public string $facebook;
+	public string $instagram;
+	public string $twitter;
+	public string $linkedin;
+	public string $midia;
+	public string $envios;
+	public string $remetente;
+	public string $remetente_nome;
     
-    public function getTable() {
-        return 'OTIMIZEcampanhas';
+    public function getTable(): string {
+        return 'MDM_campanhas';
     }
     
      public function save() {
@@ -45,7 +46,7 @@ class Campanha extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'nome ASC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEcampanhas','Campanha',$conditions,$order);
+		$result = self::load('MDM_campanhas','Campanha',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

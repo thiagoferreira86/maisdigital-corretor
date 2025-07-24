@@ -1,0 +1,1 @@
+<div class="footer bg-gray py-4 d-flex flex-lg-column" id="kt_footer">			<p><b><?=TITULO?> © <?=date("Y")?></b> Todos os direitos reservados</p></div>

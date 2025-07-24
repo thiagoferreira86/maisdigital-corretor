@@ -1,22 +1,23 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class View extends ActiveRecord {
 
-	public $id;
-	public $nome;
-	public $email;
-	public $telefone;
-	public $automovel;
-	public $categoria;
-	public $status;
-	public $observacoes;
-	public $data_cadastro;
-	public $usuario;
+	public string $id;
+	public string $nome;
+	public string $email;
+	public string $telefone;
+	public string $automovel;
+	public string $categoria;
+	public string $status;
+	public string $observacoes;
+	public string $data_cadastro;
+	public string $usuario;
     
-    public function getTable() {
+    public function getTable(): string {
         return 'PROviews';
     }
     

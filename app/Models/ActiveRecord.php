@@ -1,6 +1,13 @@
 <?php
 declare(strict_types=1);
 
+namespace App\Models;
+
+use \PDO;
+use \PDOException;
+use \Exception;
+use \DateTime;
+
 abstract class ActiveRecord {
     
     protected ?PDO $connection = null;
@@ -133,7 +140,11 @@ abstract class ActiveRecord {
 
         $stmt = (new static())->getConnection()->prepare($sql);
         $stmt->execute();
-
+    
+        if (!str_contains($class, '\\')) {
+            $class = "App\\Models\\$class";
+        }
+    
         return $stmt->fetchAll(PDO::FETCH_CLASS, $class);
     }
 
@@ -207,8 +218,8 @@ abstract class ActiveRecord {
             session_start();
         }
 
-        $sql = "INSERT INTO PROauditoria (tabela_alterada, acao, registro_id, dados_anteriores, dados_novos, corretora_id, ip, navegador, data_cadastro, admin_id) 
-                VALUES (:tabela_alterada, :acao, :registro_id, :dados_anteriores, :dados_novos, :corretora_id, :ip, :navegador, NOW(), :admin_id)";
+        $sql = "INSERT INTO MDM_logs_auditoria (tabela_alterada, acao, registro_id, dados_anteriores, dados_novos, corretora_id, usuario_id, ip, navegador, data_cadastro, admin_id) 
+                VALUES (:tabela_alterada, :acao, :registro_id, :dados_anteriores, :dados_novos, :corretora_id, :usuario_id, :ip, :navegador, NOW(), :admin_id)";
 
         $stmt = $this->getConnection()->prepare($sql);
 
@@ -218,13 +229,14 @@ abstract class ActiveRecord {
         // Assumindo que você guarda o ID do admin e da corretora na sessão
         $admin_id = $_SESSION['admin_id'] ?? null;
         $corretora_id = $_SESSION['corretora_id'] ?? null;
-
+        $usuario_id = $_SESSION['corretora_usuario_id'] ?? null;
         $stmt->bindValue(':tabela_alterada', $this->getTable());
         $stmt->bindValue(':acao', $acao);
         $stmt->bindValue(':registro_id', $registroId, PDO::PARAM_INT);
         $stmt->bindValue(':dados_anteriores', $dadosAnteriores ? json_encode($dadosAnteriores, JSON_UNESCAPED_UNICODE) : null);
         $stmt->bindValue(':dados_novos', $dadosNovos ? json_encode($dadosNovos, JSON_UNESCAPED_UNICODE) : null);
         $stmt->bindValue(':corretora_id', $corretora_id, PDO::PARAM_INT);
+        $stmt->bindValue(':usuario_id', $usuario_id, PDO::PARAM_INT);
         $stmt->bindValue(':ip', $ip);
         $stmt->bindValue(':navegador', $navegador);
         $stmt->bindValue(':admin_id', $admin_id, PDO::PARAM_INT);

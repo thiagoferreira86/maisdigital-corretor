@@ -267,59 +267,16 @@ function getUserIP(){
     }
     return $ip;
 }
-
-function statusPagamentoPagseguro($status){
-    switch($status){
-                    case '1':
-                        return 'Agendado';
-                        break;
-                    case '2':
-                        return 'Processando';
-                        break;
-                    case '3':
-                        return 'Não Processada';
-                        break;
-                    case '4':
-                        return 'Suspensa';
-                        break;
-                    case '5':
-                        return 'Paga';
-                        break;
-                    case '6':
-                        return 'Não Paga';
-                        break;
-                    }
+function safe($var, $default = '') {
+    return isset($var) ? $var : $default;
 }
-function statusAdesaoPagseguro($status){
-    switch($status){
-                    case 'INITIATED':
-                        return 'Aguardando Pagamento';
-                        break;
-                    case 'PENDING':
-                        return 'Pendente de Pagamento';
-                        break;
-                    case 'ACTIVE':
-                        return 'Pagamento Aprovado';
-                        break;
-                    case 'PAYMENT_METHOD_CHANGE':
-                        return 'Alterar Cartão de crédito';
-                        break;
-                    case 'SUSPENDED':
-                        return 'Suspenso';
-                        break;
-                    case 'CANCELLED':
-                        return 'Cancelado';
-                        break;
-                    case 'CANCELLED_BY_RECEIVER':
-                        return 'Cancelador pelo Vendedor';
-                        break;
-                    case 'CANCELLED_BY_SENDER':
-                        return 'Cancelado pelo Comprador';
-                        break;
-                    case 'EXPIRED':
-                        return 'Expirado';
-                        break;
-                    }
+function getBrowserName($user_agent) {
+    if (strpos($user_agent, 'Opera') || strpos($user_agent, 'OPR/')) return 'Opera';
+    if (strpos($user_agent, 'Edg')) return 'Edge';
+    if (strpos($user_agent, 'Chrome')) return 'Chrome';
+    if (strpos($user_agent, 'Safari')) return 'Safari';
+    if (strpos($user_agent, 'Firefox')) return 'Firefox';
+    if (strpos($user_agent, 'MSIE') || strpos($user_agent, 'Trident/7')) return 'Internet Explorer';
+    return 'Desconhecido';
 }
-
 ?>

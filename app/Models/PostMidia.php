@@ -1,16 +1,17 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class PostMidia extends ActiveRecord {
 
-	public $id;
-	public $post;
-	public $imagem;
+	public string $id;
+	public string $post;
+	public string $imagem;
     
-    public function getTable() {
-        return 'OTIMIZEpostsMidias';
+    public function getTable(): string {
+        return 'MDM_postsMidias';
     }
     
     public static function campo($id, $campo){
@@ -25,7 +26,7 @@ class PostMidia extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'id DESC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEpostsMidias','PostMidia',$conditions,$order);
+		$result = self::load('MDM_postsMidias','PostMidia',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];

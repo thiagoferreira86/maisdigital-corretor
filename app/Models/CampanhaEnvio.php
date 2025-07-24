@@ -1,18 +1,19 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Models;
 
 
 class CampanhaEnvio extends ActiveRecord {
 
-	public $id;
-	public $campanha;
-	public $lead;
-	public $status;
-	public $data_cadastro;
+	public string $id;
+	public string $campanha;
+	public string $lead;
+	public string $status;
+	public string $data_cadastro;
     
-    public function getTable() {
-        return 'OTIMIZEcampanhasEnvios';
+    public function getTable(): string {
+        return 'MDM_campanhasEnvios';
     }
     
      public function save() {
@@ -32,7 +33,7 @@ class CampanhaEnvio extends ActiveRecord {
 
 	public static function find($id = 0, $conditions = null, $order = 'id ASC') {
 		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('OTIMIZEcampanhasEnvios','CampanhaEnvio',$conditions,$order);
+		$result = self::load('MDM_campanhasEnvios','CampanhaEnvio',$conditions,$order);
 
 		if(!empty($id))
 			$result = $result[0];
