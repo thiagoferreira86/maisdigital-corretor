@@ -56,6 +56,17 @@ class LoginController{
                                 $duracaoSessao = 172800; // 48 horas em segundos
                                 $agora = time();
                                 $session_expire = $agora + $duracaoSessao;
+                                
+                                // Implementar 2FA por e-mail
+                                $codigo = $this->gerarCodigo2FA();
+                                $_SESSION['codigo_2fa'] = $codigo;
+                                $_SESSION['codigo_2fa_expira'] = time() + 300; // 5 minutos
+                                $_SESSION['2fa_user_id'] = $usuario->id;
+                                $_SESSION['2fa_user_nome'] = $usuario->nome;
+                                $this->enviarCodigoPorEmail($usuario->email, $codigo);
+                                header("Location: /verificar-codigo");
+                                exit;
+
                                 // Salvar na sessão a hora exata de expiração
                                 
                                 $sessao = new CorretoraSessao();
@@ -103,3 +114,42 @@ class LoginController{
         header("Location: /login");
     }
 }
+
+
+    private function gerarCodigo2FA(): string {
+        return str_pad(strval(rand(0, 999999)), 6, '0', STR_PAD_LEFT);
+    }
+
+    private function enviarCodigoPorEmail(string $email, string $codigo): void {
+        $assunto = "Seu código de verificação - MaisDigital";
+        $mensagem = "Seu código de verificação é: <b>{$codigo}</b><br>Ele expira em 5 minutos.";
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        $headers .= "From: no-reply@maisdigital.com.br" . "\r\n";
+
+        mail($email, $assunto, $mensagem, $headers);
+    }
+
+    public function verificarCodigo() {
+        require_once __DIR__ . '/../Views/verificar-codigo.php';
+    }
+
+    public function validarCodigo() {
+        use App\Helpers\Session;
+        Session::start();
+        $codigoDigitado = $_POST['codigo_2fa'] ?? '';
+        $codigoGerado = $_SESSION['codigo_2fa'] ?? '';
+        $expira = $_SESSION['codigo_2fa_expira'] ?? 0;
+
+        if ($codigoDigitado === $codigoGerado && time() <= $expira) {
+            // Login autorizado, criar sessão final
+            $_SESSION['corretora_usuario_id'] = $_SESSION['2fa_user_id'];
+            $_SESSION['corretora_nome'] = $_SESSION['2fa_user_nome'];
+            unset($_SESSION['codigo_2fa'], $_SESSION['codigo_2fa_expira'], $_SESSION['2fa_user_id'], $_SESSION['2fa_user_nome']);
+            header("Location: /home");
+            exit;
+        } else {
+            echo "Código inválido ou expirado.";
+            exit;
+        }
+    }
