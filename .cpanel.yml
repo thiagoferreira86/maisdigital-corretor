@@ -1,20 +1,18 @@
 deployment:
   tasks:
-    - /bin/echo "🚀 Iniciando deploy para ambiente de desenvolvimento"
+    - /bin/echo "🚀 Iniciando deploy CorretorPRO DEV"
 
     - export DEPLOYPATH=/home/mapfrecorretor/public_html/dev
     - export VERSAO=$(date +%Y%m%d%H%M%S)
 
-    # 1. Copia os arquivos primeiro
+    # Copia tudo para a pasta dev, exceto o .cpanel.yml e vendor
     - /bin/rsync -a --exclude='.git*' --exclude='vendor/' --exclude='.cpanel.yml' . $DEPLOYPATH
 
-    # 2. Atualiza o .env DENTRO do destino, após copiar
-    - /bin/sed -i "s/^CSS_VERSION=.*/CSS_VERSION=$VERSAO/" $DEPLOYPATH/.env
-    - /bin/sed -i "s/^JS_VERSION=.*/JS_VERSION=$VERSAO/" $DEPLOYPATH/.env
+    # Gera o .env substituindo as variáveis do template
+    - sed "s/{{CSS_VERSION}}/$VERSAO/" .env.template | sed "s/{{JS_VERSION}}/$VERSAO/" > $DEPLOYPATH/.env
 
-    # 3. Grava log
-    - /bin/echo "Versão: $VERSAO" > $DEPLOYPATH/deploy.log
-    - /bin/cat $DEPLOYPATH/.env >> $DEPLOYPATH/deploy.log
+    # Log para depuração
+    - echo "Versão gerada: $VERSAO" > $DEPLOYPATH/deploy.log
+    - cat $DEPLOYPATH/.env >> $DEPLOYPATH/deploy.log
 
-    - /bin/echo "✅ Deploy finalizado com sucesso!" 
-    - /bin/echo "📅 Data: $(date +'%Y-%m-%d %H:%M:%S')" >> $DEPLOYPATH/deploy.log
+    - /bin/echo "✅ Deploy finalizado com sucesso"
