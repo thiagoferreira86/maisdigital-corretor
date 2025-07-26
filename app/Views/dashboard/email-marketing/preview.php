@@ -1,7 +1,8 @@
 <?php
-include '../../classes/config.php';
-include '../includes/sessao.php';
-$ativa = 'E-mail Marketing';
+use App\Models\EmailsMarketing;
+use App\Models\TemplateEmailsMarketing;
+use App\Models\Corretora;
+use App\Models\EmailsMarketingVariaveis;    
 
 $emails = EmailsMarketing::find(0, array("id = '".$_GET['id']."' AND corretora = '".$_SESSION['corretora_id']."'"));
 if(count($emails) >=1){

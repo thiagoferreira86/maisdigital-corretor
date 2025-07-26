@@ -40,8 +40,7 @@
                                 <div class="tab-content mt-5" id="myTabContent">
                                     <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel" aria-labelledby="kt_tab_pane_2">
                                         <div class="row">
-        					            <?
-        					                $templates = TemplateLandingpage::find(0, array("status = 'Ativo'"));
+        					            <?php
         					                if(count($templates) >=1){
         					                    foreach($templates as $t){
         					            ?>
@@ -65,7 +64,7 @@
         											<!--end::Name-->
         											<!--begin::Buttons-->
         											<div class="mt-9">
-        												<a href="javascript:void(0)" class="btn btn-light-primary font-weight-bolder btn-sm py-4 px-6 text-uppercase" onclick="criarLanding(<?=$t->id?>)">Criar Landing</a>
+        												<a href="javascript:void(0)" class="btn btn-light-primary font-weight-bolder btn-sm py-4 px-6 text-uppercase" onclick="criaPagina(<?=$t->id?>)">Criar Landing</a>
         											</div>
         											<!--end::Buttons-->
         										</div>
@@ -110,9 +109,8 @@
 		<!--begin::Page Vendors(used by this page)-->
 		<!--end::Page Scripts-->
         <script>
-            function criarLanding(id){
+            function criaPagina(id){
                 id = id;
-                classe = 'Landing';
                 Swal.fire({
                     title: "Tem certeza que deseja escolher esse Template?",
                     text: "",
@@ -125,14 +123,14 @@
                             $.ajax({
                                 type: "POST",
                                 dataType: "json",
-                                url: "landing/actions/criarLanding.php",
+                                url: "dashboard/pagina-de-vendas/criaPagina",
                                 data: { id:id },
                                 processData: true,
                                 success: function(data){
                                     console.log(data)
                                     if(data.sucesso == true){
                                         Swal.fire("Sucesso!", "Criado com Sucesso!", "success");
-                                        setTimeout(function(){ location.href="landing" }, 1000);
+                                        setTimeout(function(){ location.href="dashboard/pagina-de-vendas/suas-paginas"; }, 1000);
                                     } else {
                                         Swal.fire("Erro!", data.erro, "error");
                                     }

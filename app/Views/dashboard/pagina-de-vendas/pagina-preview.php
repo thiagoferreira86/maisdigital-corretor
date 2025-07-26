@@ -1,13 +1,12 @@
 <?php
-include '../../classes/config.php';
-include '../includes/sessao.php';
-$ativa = 'Landing';
+use App\Models\Landing;
+use App\Models\TemplateLandingpage;
+use App\Models\LandingVariaveis;
 
 $lps = Landing::find(0, array("id = '".$_GET['id']."' AND corretora = '".$_SESSION['corretora_id']."'"));
 //print_r($lps);
 if(count($lps) >=1){
     $site = Landing::find($lps[0]->id);
-    Log::grava('Acesso Landing Preview - '.$site->titulo);
     $templateLanding = TemplateLandingpage::find($lps[0]->template);
     $html = file_get_contents(BASE."templates/".$templateLanding->pasta."/".$templateLanding->referencia."/index.html");
     $html = preg_replace('/{{dominio}}/', BASE.'templates/'.$templateLanding->pasta.'/'.$templateLanding->referencia.'/', $html);

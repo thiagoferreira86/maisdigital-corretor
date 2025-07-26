@@ -1,8 +1,6 @@
 <?php
-include '../../classes/config.php';
-include '../includes/sessao.php';
-Log::grava('Acesso Preview Cart達o');
-$ativa = 'Cart達o';
+use App\Models\TemplateCartoes;
+use App\Models\Cartao;
 
 $lps = Cartao::find(0, array("id = '".$_GET['id']."' AND corretora = '".$_SESSION['corretora_id']."'"));
 if(count($lps) >=1){

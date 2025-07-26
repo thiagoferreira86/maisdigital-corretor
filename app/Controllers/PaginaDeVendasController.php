@@ -6,8 +6,13 @@ use App\Models\CorretoraUsuario;
 use App\Models\CorretoraSessao;
 use App\Models\TemplateLandingpage;
 use App\Models\Landing;
+use App\Models\LandingVariaveis;
 use App\Models\View;
-use UAParser\Parser;
+/**
+ * PaginaDeVendasController
+ * 
+ * Controller for managing sales pages in the application.
+ */
 
 class PaginaDeVendasController{
     
@@ -36,6 +41,8 @@ class PaginaDeVendasController{
         $subativo = 'Página';
         $corretoraNome = explode(" ", $_SESSION['corretora_nome']);
         $usuario = CorretoraUsuario::find($_SESSION['corretora_usuario_id']);
+        $template = TemplateLandingpage::find($site->template);
+        $variaveis = LandingVariaveis::find(0, array("landing = '".$site->id."' AND imagem != ''"));
         $this->view('pagina', compact(
             'ativa', 'subativo', 'corretoraNome', 'usuario', 'templates'
         ));

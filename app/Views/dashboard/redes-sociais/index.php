@@ -449,7 +449,7 @@
                 $.ajax({
                     type: "POST",
                     dataType: "json",
-                    url: "redes-sociais/lista-artes",
+                    url: "dashboard/redes-sociais/listaArtes",
                     data: { tipo:tipo, formato:formato, tema:tema, page:page },
                     processData: true,
                     success: function(data){
