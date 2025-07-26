@@ -5,6 +5,7 @@ storage/
 uploads/
 /public/imagens/
 
+
 # Arquivos de configuração sensíveis
 .env
 .env.*
