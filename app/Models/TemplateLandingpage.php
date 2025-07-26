@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-
 class TemplateLandingpage extends ActiveRecord {
 
 	public string $id;
@@ -49,15 +48,17 @@ class TemplateLandingpage extends ActiveRecord {
 		$last = self::find(0,null,'nome DESC LIMIT 1');
 		return $last[0];
 	}
-	public static function find(int $id = 0, ?array $conditions = null, string $order = 'id DESC'): mixed
-		$conditions = self::treatConditions($id,$conditions);
-		$result = self::load('MDM_templatesLandingpages','TemplateLandingpage',$conditions,$order);
+	public static function find(int|string $id = 0, ?array $conditions = null, string $order = 'nome ASC'): mixed
+    {
+        $conditions = self::treatConditions($id, $conditions);
+        $result = self::load('MDM_templatesLandingpages', static::class, $conditions, $order);
 
-		if(!empty($id))
-			$result = $result[0];
+        if (!empty($id)) {
+            return $result[0] ?? null;
+        }
 
-		return $result;
-	}
+        return $result;
+    }
 	public static function paginate($page,$quantity,$conditions="0=0",$order='nome ASC') {
 		return self::find(0,array($conditions),$order. " LIMIT ".($page*$quantity).",$quantity");
 	}
