@@ -10,7 +10,7 @@ class AgendaDica extends ActiveRecord
     public string $dica = '';
 
 
-    public function getTable(): string: string
+    public function getTable(): string
     {
         return 'MDM_agenda_dicas';
     }

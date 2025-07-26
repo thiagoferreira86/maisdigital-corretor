@@ -42,6 +42,7 @@ define('CSS_VERSION', $_ENV['CSS_VERSION'] ?? '');
 define('JS_VERSION', $_ENV['JS_VERSION'] ?? '');
 
 define('BASE', $_ENV['URL_DASHBOARD'] ?? 'https://dev.mapfrecorretor.com.br/');
+define('DASHBOARD', $_ENV['URL_DASHBOARD'] ?? 'https://dev.mapfrecorretor.com.br/');
 
 define('TEMPLATES', BASE . 'templates/');
 define('TEMPLATES_SITES', BASE . 'templates/sites/');

@@ -12,9 +12,10 @@ use App\Models\Arte;
 use App\Models\View;
 use App\Models\AgendaDica;
 use UAParser\Parser;
-
+use \DateTime;
 
 class AgendaController{
+    
     public function index(){
         $ativa = 'Agenda';
         $subativo = '';
@@ -57,6 +58,7 @@ class AgendaController{
             $data['sucesso'] = false;
             $data['erro'] = 'A Data não pode estar vazia';
         }
+        echo json_encode($data);
     }
     public function logout(){
         session_destroy();

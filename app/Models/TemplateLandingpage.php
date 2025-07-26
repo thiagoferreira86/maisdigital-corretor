@@ -40,7 +40,7 @@ class TemplateLandingpage extends ActiveRecord {
         return 'MDM_templatesLandingpages';
     }
     
-	public function save() {
+	public function save(): bool{
 	    $this->conteudo = addslashes($this->conteudo);
 		return parent::save();
 	}
@@ -49,7 +49,7 @@ class TemplateLandingpage extends ActiveRecord {
 		$last = self::find(0,null,'nome DESC LIMIT 1');
 		return $last[0];
 	}
-	public static function find($id = 0, $conditions = null, $order = 'nome ASC') {
+	public static function find(int $id = 0, ?array $conditions = null, string $order = 'id DESC'): mixed
 		$conditions = self::treatConditions($id,$conditions);
 		$result = self::load('MDM_templatesLandingpages','TemplateLandingpage',$conditions,$order);
 

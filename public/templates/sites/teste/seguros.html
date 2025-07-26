@@ -1,0 +1,209 @@
+<?
+include 'classes/config.php'; 
+$base_pagina = 'https://'.$_SERVER[HTTP_HOST].$_SERVER[REQUEST_URI];
+$url =  explode(".", "$_SERVER[HTTP_HOST]");
+$subdominio = $url[0];
+$base_site = 'https://'.$url[1].'.'.$url[2];
+$sites = Site::find(0, array("subdominio = '".$subdominio."' AND status = 1"));
+$site = $sites[0];
+if(count($sites) >=1){
+$view = new View();
+$view->site = $site->id;
+$view->save();
+
+
+$whatsapp = str_replace(array("(", ")", ".", " ", ",", "-"), "", $site->whatsapp);
+$url_seguro = $_GET['url'];
+$seguros = Seguro::find(0, array("url = '".$url_seguro."'"));
+$seguro = $seguros[0];
+$sitedefault = '1';
+$default = Sitedefault::find($sitedefault);
+if(!empty($site->cor_botoes)){
+    $cor_botoes = $site->cor_botoes;
+} else {
+    $cor_botoes = $default->cor_botoes;
+}
+} else { 
+ header("Location: 404.html");
+} ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title><? echo $seguro->nome.' - '.ucfirst($subdominio)?></title>
+  <base href="/">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="Webflow" name="generator">
+  <link href="css/normalize.css" rel="stylesheet" type="text/css">
+  <link href="css/webflow.css" rel="stylesheet" type="text/css">
+  <link href="css/corretorpro.webflow.css" rel="stylesheet" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
+  <script type="text/javascript">WebFont.load({  google: {    families: ["Rubik:300,regular,italic,500,700,900","Source Sans Pro:200,300,regular,600,700,900","Fira Sans:100,200,300,regular,500,600,700,800,900","Barlow:100,200,300,regular,500,600,700,800,900"]  }});</script>
+  <!-- [if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" type="text/javascript"></script><![endif] -->
+  <script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script>
+  <link rel="shortcut icon" href="https://app.corretorpro.online/imagens/favicon.png" />
+  <link href="images/webclip.png" rel="apple-touch-icon">
+  <? include 'estilo.php'; ?>
+  <style>
+        #w-node-baab77c86307-75c1e7dc{
+            width:100%;   
+            margin: 15px 0;
+        }
+        .contact-form {
+            width: 90%;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            margin: 20px 0;
+        }
+        #w-node-baab77c86309-75c1e7dc{ width:47%; float:left; margin: 10px 3% 20px 0;}
+        #w-node-baab77c8630b-75c1e7dc{ width:47%; float:left; margin: 10px 0 20px 3%;}
+        @media only screen and (min-width:600px){
+        
+            .paragraph.left-align.seguros {
+                line-height: 1.7;
+                text-align: justify;
+            }
+            .paragraph.left-align {
+                margin-bottom: 0px;
+                line-height: 1.5;
+                text-align: left;
+                text-align: justify;
+            }
+        }
+    #Sobre p{
+    text-align: left;
+    color: #99a1ba;
+    font-size: 17px;
+    line-height: 1.4;
+    font-weight: 400;
+}
+    #Sobre{
+    text-align: left;
+    color: #99a1ba;
+    font-size: 17px;
+    line-height: 1.4;
+    font-weight: 400;
+}
+  </style>
+</head>
+<body>
+  <div class="hero-section _2">
+    <div class="container-flex hero">
+      <div class="feature-wrap seguros">
+        <div class="feature-column-content hero">
+          <div class="content-block hero">
+            <h1 class="hero-h1 left"><?=$seguro->titulo?></h1>
+            <p class="paragraph left-align subtitulo"><?=$seguro->subtitulo?></p>
+          </div>
+        </div>
+        <div id="Simular" class="feature-column-image hero">
+          <div class="contactright seguros">
+            <h2 class="content-cta right">Inicie sua Cotação<a href="http://flowbase.co" target="_blank" class="link"></a></h2>
+            <section id="contact-form" class="contact-form">
+              <div class="w-container">
+                <div class="form-block-2 w-form">
+                  <form id="wf-form-Contact-Form" name="wf-form-Contact-Form" class="form form-cotacao">
+                    <input type="hidden" id="pagina" name="pagina" value="<?=$seguro->nome?>">
+                    <input type="hidden" id="corretor" name="corretor" value="<?=$site->corretor?>"
+                    <div class="contact-form-grid">
+                        <div id="w-node-baab77c86307-75c1e7dc">
+                            <input type="text" class="text-field w-input" maxlength="256" name="nome" placeholder="Nome" id="nome" required>
+                        </div>
+                        <div id="w-node-baab77c86307-75c1e7dc">
+                            <input type="email" class="text-field-2 w-input" maxlength="256" name="email" placeholder="Email" id="email" required>
+                        </div>
+                        <div id="w-node-baab77c86307-75c1e7dc">
+                            <input type="tel" class="text-field-3 w-input" maxlength="256" name="telefone" placeholder="WhatsApp (DDD)" id="telefone" required>
+                        </div>
+                        <div id="w-node-baab77c86307-75c1e7dc">
+                            <div style="width:10%; float:left;">
+                                <input type="checkbox" required>
+                            </div>
+                            <div style="width:90%; float:left;"><label style="font-weight:normal; font-size:0.7rem; text-align:justify;">Ao preencher o formulário, consinto com o uso de meus dados pessoais para receber comunicações da Corretora de Seguros, permitindo os tratamentos para tanto necessários, manifestando-me de acordo com a <a href="privacidade" style="color: <?=$cor_botoes?>;" target="_blank">Política de Privacidade</a> disponível no site.</label></div>
+                        </div>
+                    </div><input type="submit" value="Iniciar" data-wait="Aguarde..." class="submit-button w-button"></form>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      <div class="feature-wrap seguros2">
+        <div class="feature-column-content hero seguros2">
+          <div class="content-block hero seguros">
+            <h1 class="hero-h1 seguros">Detalhes</h1>
+            <p class="paragraph left-align seguros"><?=$seguro->detalhes?></p>
+          </div>
+        </div>
+        <div class="feature-column-image hero">
+          <div class="feature-image-div hero"><img src="https://app.corretorpro.online/imagens/seguros/<?=$seguro->imagem?>"  alt="" class="feature-image hero seguros"></div>
+        </div>
+      </div>
+      <div class="feature-wrap seguros _2">
+        <div class="feature-column-content">
+          <div class="content-block seguros" id="Sobre">
+            <h2 class="content-h2 left">Por que nós?</h2>
+            <?=html_entity_decode($site->texto_sobre)?>
+            <a onclick="simular()" class="hero-button white seguros w-button">Simular Seguro agora</a></div>
+        </div>
+        <div class="feature-column-image">
+          <? if(!empty($site->imagem_sobre)){ ?>
+          <div class="feature-image-div"><img src="https://app.corretorpro.online/imagens/sobres/<?=$site->imagem_sobre?>" alt="" class="feature-image team"></div>
+          <? } else { ?>
+          <div class="feature-image-div"><img src="https://app.corretorpro.online/imagens/default/<?=$default->imagem_sobre?>" alt="" class="feature-image team"></div>
+          <? } ?>
+        </div>
+      </div>
+    </div>
+    <div class="navigation">
+      <div class="container-navigation">
+        <div class="navigation-block-left">
+             <? if(!empty($site->logotipo)){ ?>
+            <a href="/" class="logo-link w-inline-block w--current"><img src="https://app.corretorpro.online/imagens/logotipos/<?=$site->logotipo?>" width="220" alt="" class="logo-image"></a></div>
+            <? } else { ?>
+            <a href="/" class="logo-link w-inline-block w--current"><img src="https://app.corretorpro.online/imagens/default/<?=$default->logotipo?>" width="220" alt="" class="logo-image"></a></div>
+            <? } ?>
+        <div class="navigation-link-wrap">
+          <a href="/" class="navigation-link w-inline-block">
+            <div class="navigation-text">Home</div>
+          </a>
+          <a href="/#Seguros" class="navigation-link w-inline-block">
+            <div class="navigation-text">Seguros</div>
+          </a>
+          <a href="#Sobre" class="navigation-link w-inline-block">
+            <div class="navigation-text">Sobre</div>
+          </a>
+          <a href="/#Seguradoras" class="navigation-link w-inline-block">
+            <div class="navigation-text">Seguradoras</div>
+          </a>
+          <a href="/#Contato" class="navigation-link w-inline-block">
+            <div class="navigation-text">Contato</div>
+          </a>
+        </div>
+        <div class="navigation-block-right"><a href="https://api.whatsapp.com/send?phone=55<?=$whatsapp?>" target="_blank" class="button-navigation whatsapp w-button">WhatsApp</a>
+          <div data-delay="0" class="dropdown-mobile w-dropdown">
+            <div class="dropdown-toggle w-dropdown-toggle">
+              <a href="#" class="mobile-button-link w-inline-block">
+                <div data-w-id="b0b263d7-6243-973e-47bb-5169c5563162" data-animation-type="lottie" data-src="https://uploads-ssl.webflow.com/5d4bf31a8620ae8b6132d697/5d5be4b6eaf3b73429e80497_7943-circle-menu-closing.json" data-loop="0" data-direction="1" data-autoplay="0" data-is-ix2-target="1" data-renderer="svg" data-default-duration="0" data-duration="0" data-ix2-initial-state="0" class="mobile-icon-animation"></div>
+              </a>
+            </div>
+            <nav class="mobiel-dropdown w-dropdown-list">
+                <a href="/" class="dropdown-link w-dropdown-link">Home</a>
+                <a href="/#Seguros" class="dropdown-link w-dropdown-link">Seguros</a>
+                <a href="#Sobre" class="dropdown-link w-dropdown-link">Sobre</a>
+                <a href="/#Seguradoras" class="dropdown-link w-dropdown-link">Seguradoras</a>
+                <a href="/#Contato" class="dropdown-link w-dropdown-link">Contato</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+ <? include 'footer.php'; ?>
+ <script>
+     function simular(){
+          $('html, body').animate({
+            scrollTop: $("#Simular").offset().top
+            }, 2000);
+     }
+ </script>

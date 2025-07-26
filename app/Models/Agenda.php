@@ -1,8 +1,6 @@
 <?php
 declare(strict_types=1);
 
-declare(strict_types=1);
-
 namespace App\Models;
 
 class Agenda extends ActiveRecord
@@ -15,7 +13,7 @@ class Agenda extends ActiveRecord
     public string $color = '';
     public string $detalhes = '';
 
-    public function getTable(): string: string
+    public function getTable(): string
     {
         return 'MDM_agenda';
     }

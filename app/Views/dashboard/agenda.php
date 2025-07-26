@@ -25,6 +25,12 @@
                 align-content: center;
                 align-items: center;
             }
+            .agendaDica {
+                padding: 5px 24px;
+                border: 2px solid #D81E05;
+                width: 90%;
+                margin-left: 5%;
+            }
 		</style>
 	</head>
 	<!--end::Head-->
@@ -52,8 +58,8 @@
     								    <div class="subheader-background" style="position: relative; background:url(<?=BASE?>imagens/agendar.jpg)">
     								    </div>
     								    <div class="subheader-titulo">
-        							        <h1>Agenda Estratégica</h1>
-        							        <h3>Organize seu calendário com dicas de conteúdos por dia da semana</h3>
+        							        <h1>Agenda</h1>
+        							        <h3>Organize seu calendário de Post nas Redes Sociais & Campanhas de E-mail Marketing, com dicas de conteúdos por dia da semana.</h3>
     						            </div>
     						        </div>
 								</div>
@@ -76,58 +82,6 @@
                                         </div>
                                     </div>
                                 </div>
-								<div class="row">
-                                	<div class="col-xl-12">
-                                		<!--begin::Base Table Widget 2-->
-                                        <div class="card card-custom card-stretch gutter-b">
-                                            <!--begin::Header-->
-                                            <div class="card-header border-0 pt-5">
-                                                <h3 class="card-title align-items-start flex-column">
-                                                    <span class="card-label font-weight-bolder text-dark">Dicas de conteúdos</span>
-                                                </h3>
-                                            </div>
-                                            <!--end::Header-->
-                                        
-                                            <!--begin::Body-->
-                                            <div class="card-body pt-2 pb-0 mt-n3">
-                                                <table class="tabela-dicas">
-                                                    <tr>
-                                                        <th>DOM</th>
-                                                        <td>Postagens com tom mais leve. Lembre-se que domingo geralmente representa descanso para o seu cliente. Falar sobre curiosidades e atualidades.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>SEG</th>
-                                                        <td>Início da semana. Utilizar conteúdos que possam motivar e inspirar. Bastidores da sua corretora. Organização para a semana e frases motivacionais são um bom exemplo de conteúdo.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>TER</th>
-                                                        <td> Conteúdo sobre produto que comercializa. Benefícios atrativos, alguma promoção e/ou desconto, campanha. Que tal abrir para que seus clientes façam perguntas à você.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>QUA</th>
-                                                        <td>Continue com os conteúdos sobre produtos. Aborde agora depoimentos de clientes e novidades. Pense em conteúdo que interesse o público que pode contratar.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>QUI</th>
-                                                        <td>Dia do TBT. Descreva algum evento passado. Curso, eventos, palestras ou lembrança interessante. Diversifique, use videos e fotos reais da corretora.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>SEX</th>
-                                                        <td>O final de semana se aproxima. Que tal dar uma dica para seu cliente sobre filmes, livros ou um passeio? Conecte as necessidades a produtos. Continue a estimular o contato de seus clientes. Faça perguntas e enquetes.</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>SAB</th>
-                                                        <td>Pense em conteúdos de entretenimento. Bastidores, seu cardápio de produtos, etc.</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <!--end::Body-->
-                                        </div>
-                                        <!--end::Base Table Widget 2-->
-                                	</div>
-                                </div>
-                                
-                                
 								<!--end::Card-->
 							</div>
 							<!--end::Container-->
@@ -192,9 +146,9 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-light-danger font-weight-bold btn-excluir" onclick="excluirEvento(this)" data-id="">Excluir</button>
-                            <button type="button" class="btn btn-light-warning font-weight-bold" data-dismiss="modal">Fechar</button>
-                            <button type="submit" class="btn btn-primary font-weight-bold">Salvar</button>
+                            <button type="button" class="btn btn-mapfre-black font-weight-bold btn-excluir" onclick="excluirEvento(this)" data-id="">Excluir</button>
+                            <button type="button" class="btn btn-mapfre-reverse font-weight-bold" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-mapfre font-weight-bold">Salvar</button>
                         </div>
                     </form>
                 </div>
@@ -329,7 +283,7 @@
                     $.ajax({
                         type: "POST",
                         dataType: "json",
-                        url: "agenda/pegaDica",
+                        url: "dashboard/agenda/pegaDica",
                         data: {dt:dt},
                         processData: true,
                         success: function(data){

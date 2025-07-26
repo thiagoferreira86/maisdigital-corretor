@@ -1,0 +1,926 @@
+"use strict";
+
+// Class definition
+var KTWidgets = function () {
+    // Private properties
+    var _initChartsWidget2 = function() {
+        
+        var element = document.getElementById("kt_charts_widget_2_chart");
+        var dados = $("#dadosMensal").val();
+        var categorias = $("#categoriasMensal").val();
+        
+        var dadosArray = dados.split(",");
+        var categoriasArray = categorias.split(",");
+
+        var options = {
+            
+            series: [{
+                name: 'Views',
+                data: dadosArray
+            }],
+            noData: {
+                text: 'Carregando..'
+            },
+            chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                    show: false
+                },
+                stacked: true
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: ['30%'],
+                    endingShape: 'rounded'
+                },
+            },
+            legend: {
+                show: false
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: categoriasArray,
+                axisBorder: {
+                    show: false,
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            yaxis: {
+                min: 0,
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                active: {
+                    allowMultipleDataPointsSelection: false,
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                }
+            },
+            tooltip: {
+                style: {
+                    fontSize: '12px',
+                    fontFamily: KTApp.getSettings()['font-family']
+                },
+                y: {
+                    formatter: function (val) {
+                        return val + " views"
+                    }
+                }
+            },
+            colors: [KTApp.getSettings()['colors']['theme']['base']['warning'], KTApp.getSettings()['colors']['gray']['gray-300']],
+            grid: {
+                borderColor: KTApp.getSettings()['colors']['gray']['gray-200'],
+                strokeDashArray: 4,
+                yaxis: {
+                    lines: {
+                        show: true
+                    }
+                }
+            }
+        };
+        var chart = new ApexCharts(element, options);
+        chart.render();
+    }
+    var _initChartsWidget3 = function() {
+        
+        var element = document.getElementById("kt_charts_widget_3_chart");
+        var dados = $("#dadosSemanal").val();
+        var categorias = $("#categoriasSemanal").val();
+        
+        var dadosArray = dados.split(",");
+        var categoriasArray = categorias.split(",");
+
+        var options = {
+            
+            series: [{
+                name: 'Views',
+                data: dadosArray
+            }],
+            chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: ['30%'],
+                    endingShape: 'rounded'
+                },
+            },
+            legend: {
+                show: false
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: categoriasArray,
+                axisBorder: {
+                    show: false,
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                active: {
+                    allowMultipleDataPointsSelection: false,
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                }
+            },
+            tooltip: {
+                style: {
+                    fontSize: '12px',
+                    fontFamily: KTApp.getSettings()['font-family']
+                },
+                y: {
+                    formatter: function (val) {
+                        return val + " views"
+                    }
+                }
+            },
+            colors: [KTApp.getSettings()['colors']['theme']['base']['success'], KTApp.getSettings()['colors']['gray']['gray-300']],
+            grid: {
+                borderColor: KTApp.getSettings()['colors']['gray']['gray-200'],
+                strokeDashArray: 4,
+                yaxis: {
+                    lines: {
+                        show: true
+                    }
+                }
+            }
+        };
+        var chart = new ApexCharts(element, options);
+        chart.render();
+    }
+    var _initChartsWidget4 = function() {
+        
+        var element = document.getElementById("kt_charts_widget_4_chart");
+        var dados = $("#dadosDiario").val();
+        var categorias = $("#categoriasDiario").val();
+        
+        var dadosArray = dados.split(",");
+        var categoriasArray = categorias.split(",");
+
+        var options = {
+            
+            series: [{
+                name: 'Views',
+                data: dadosArray
+            }],
+            chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: ['30%'],
+                    endingShape: 'rounded'
+                },
+            },
+            legend: {
+                show: false
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: categoriasArray,
+                axisBorder: {
+                    show: false,
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                active: {
+                    allowMultipleDataPointsSelection: false,
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                }
+            },
+            tooltip: {
+                style: {
+                    fontSize: '12px',
+                    fontFamily: KTApp.getSettings()['font-family']
+                },
+                y: {
+                    formatter: function (val) {
+                        return val + " views"
+                    }
+                }
+            },
+            colors: [KTApp.getSettings()['colors']['theme']['base']['primary'], KTApp.getSettings()['colors']['gray']['gray-300']],
+            grid: {
+                borderColor: KTApp.getSettings()['colors']['gray']['gray-200'],
+                strokeDashArray: 4,
+                yaxis: {
+                    lines: {
+                        show: true
+                    }
+                }
+            }
+        };
+        var chart = new ApexCharts(element, options);
+        chart.render();
+    }
+    
+    var _initChartsWidget22 = function() {
+        
+        var element = document.getElementById("kt_charts_widget_22_chart");
+        var dados = $("#dadosMensalLanding").val();
+        var categorias = $("#categoriasMensalLanding").val();
+        
+        var dadosArray = dados.split(",");
+        var categoriasArray = categorias.split(",");
+
+        var options = {
+            
+            series: [{
+                name: 'Views',
+                data: dadosArray
+            }],
+            chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: ['30%'],
+                    endingShape: 'rounded'
+                },
+            },
+            legend: {
+                show: false
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: categoriasArray,
+                axisBorder: {
+                    show: false,
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                active: {
+                    allowMultipleDataPointsSelection: false,
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                }
+            },
+            tooltip: {
+                style: {
+                    fontSize: '12px',
+                    fontFamily: KTApp.getSettings()['font-family']
+                },
+                y: {
+                    formatter: function (val) {
+                        return val + " views"
+                    }
+                }
+            },
+            colors: [KTApp.getSettings()['colors']['theme']['base']['warning'], KTApp.getSettings()['colors']['gray']['gray-300']],
+            grid: {
+                borderColor: KTApp.getSettings()['colors']['gray']['gray-200'],
+                strokeDashArray: 4,
+                yaxis: {
+                    lines: {
+                        show: true
+                    }
+                }
+            }
+        };
+        var chart = new ApexCharts(element, options);
+        chart.render();
+    }
+    var _initChartsWidget23 = function() {
+        
+        var element = document.getElementById("kt_charts_widget_23_chart");
+        var dados = $("#dadosSemanalLanding").val();
+        var categorias = $("#categoriasSemanalLanding").val();
+        
+        var dadosArray = dados.split(",");
+        var categoriasArray = categorias.split(",");
+
+        var options = {
+            
+            series: [{
+                name: 'Views',
+                data: dadosArray
+            }],
+            chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: ['30%'],
+                    endingShape: 'rounded'
+                },
+            },
+            legend: {
+                show: false
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: categoriasArray,
+                axisBorder: {
+                    show: false,
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                active: {
+                    allowMultipleDataPointsSelection: false,
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                }
+            },
+            tooltip: {
+                style: {
+                    fontSize: '12px',
+                    fontFamily: KTApp.getSettings()['font-family']
+                },
+                y: {
+                    formatter: function (val) {
+                        return val + " views"
+                    }
+                }
+            },
+            colors: [KTApp.getSettings()['colors']['theme']['base']['success'], KTApp.getSettings()['colors']['gray']['gray-300']],
+            grid: {
+                borderColor: KTApp.getSettings()['colors']['gray']['gray-200'],
+                strokeDashArray: 4,
+                yaxis: {
+                    lines: {
+                        show: true
+                    }
+                }
+            }
+        };
+        var chart = new ApexCharts(element, options);
+        chart.render();
+    }
+    var _initChartsWidget24 = function() {
+        
+        var element = document.getElementById("kt_charts_widget_24_chart");
+        var dados = $("#dadosDiarioLanding").val();
+        var categorias = $("#categoriasDiarioLanding").val();
+        
+        var dadosArray = dados.split(",");
+        var categoriasArray = categorias.split(",");
+
+        var options = {
+            
+            series: [{
+                name: 'Views',
+                data: dadosArray
+            }],
+            chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                    show: false
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: ['30%'],
+                    endingShape: 'rounded'
+                },
+            },
+            legend: {
+                show: false
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: categoriasArray,
+                axisBorder: {
+                    show: false,
+                },
+                axisTicks: {
+                    show: false
+                },
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            yaxis: {
+                labels: {
+                    style: {
+                        colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                        fontSize: '12px',
+                        fontFamily: KTApp.getSettings()['font-family']
+                    }
+                }
+            },
+            fill: {
+                opacity: 1
+            },
+            states: {
+                normal: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                hover: {
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                },
+                active: {
+                    allowMultipleDataPointsSelection: false,
+                    filter: {
+                        type: 'none',
+                        value: 0
+                    }
+                }
+            },
+            tooltip: {
+                style: {
+                    fontSize: '12px',
+                    fontFamily: KTApp.getSettings()['font-family']
+                },
+                y: {
+                    formatter: function (val) {
+                        return val + " views"
+                    }
+                }
+            },
+            colors: [KTApp.getSettings()['colors']['theme']['base']['primary'], KTApp.getSettings()['colors']['gray']['gray-300']],
+            grid: {
+                borderColor: KTApp.getSettings()['colors']['gray']['gray-200'],
+                strokeDashArray: 4,
+                yaxis: {
+                    lines: {
+                        show: true
+                    }
+                }
+            }
+        };
+        var chart = new ApexCharts(element, options);
+        chart.render();
+    }
+    
+    return {
+        init: function () {
+            _initChartsWidget2();
+            _initChartsWidget3();
+            _initChartsWidget4();
+            
+            _initChartsWidget22();
+            _initChartsWidget23();
+            _initChartsWidget24();
+          
+        }
+    }
+}();
+
+// Webpack support
+if (typeof module !== 'undefined') {
+    module.exports = KTWidgets;
+}
+
+// SITE //////////////////////////////////  ////////////////////////////////// //////////////////////////////////
+/*$(".nav-mes").click(function(){
+    $(".nav-site").each(function() {
+        $(this).removeClass('active');
+    }); 
+    $(".nav-mes").addClass("active");
+    $("#kt_charts_widget_2_chart").show();
+    $("#kt_charts_widget_3_chart").hide();
+    $("#kt_charts_widget_4_chart").hide();
+});
+$(".nav-semana").click(function(){
+    $(".nav-site").each(function() {
+        $(this).removeClass('active');
+    }); 
+    $(".nav-semana").addClass("active");
+    $("#kt_charts_widget_2_chart").hide();
+    $("#kt_charts_widget_3_chart").show();
+    $("#kt_charts_widget_4_chart").hide();
+});
+$(".nav-dia").click(function(){
+    $(".nav-site").each(function() {
+        $(this).removeClass('active');
+    }); 
+    $(".nav-dia").addClass("active");
+    $("#kt_charts_widget_2_chart").hide();
+    $("#kt_charts_widget_3_chart").hide();
+    $("#kt_charts_widget_4_chart").show();
+});*/
+ ////////////////////////////////// ////////////////////////////////// //////////////////////////////////
+
+
+// LANDING //////////////////////////////////  ////////////////////////////////// //////////////////////////////////
+$(".nav-mes-landing").click(function(){
+    $(".nav-landing").each(function() {
+        $(this).removeClass('active');
+    }); 
+    $(".nav-mes-landing").addClass("active");
+    $(".kt_charts_widget_22_chart").show();
+    $(".kt_charts_widget_23_chart").hide();
+    $(".kt_charts_widget_24_chart").hide();
+});
+$(".nav-semana-landing").click(function(){
+    $(".nav-landing").each(function() {
+        $(this).removeClass('active');
+    }); 
+    $(".nav-semana-landing").addClass("active");
+    $(".kt_charts_widget_22_chart").hide();
+    $(".kt_charts_widget_23_chart").show();
+    $(".kt_charts_widget_24_chart").hide();
+});
+$(".nav-dia-landing").click(function(){
+    $(".nav-landing").each(function() {
+        $(this).removeClass('active');
+    }); 
+    $(".nav-dia-landing").addClass("active");
+    $(".kt_charts_widget_22_chart").hide();
+    $(".kt_charts_widget_23_chart").hide();
+    $(".kt_charts_widget_24_chart").show();
+});
+ ////////////////////////////////// ////////////////////////////////// //////////////////////////////////
+ 
+
+ ////////////////////////////////// ////////////////////////////////// //////////////////////////////////
+
+
+$(".nav-widget-site").click(function(){
+    $(".nav-widget-landing").removeClass('active');
+    $(".nav-widget-site").addClass("active");
+    $(".card-grafico-site").show();
+    $(".card-grafico-landing").hide();
+});
+$(".nav-widget-landing").click(function(){
+    $(".nav-widget-landing").addClass('active');
+    $(".nav-widget-site").removeClass("active");
+    $(".card-grafico-site").hide();
+    $(".card-grafico-landing").show();
+});
+$(".nav-widget-email").click(function(){
+    $(".nav-widget-landing").removeClass('active');
+    $(".nav-widget-site").removeClass("active");
+    $(".card-grafico-site").hide();
+    $(".card-grafico-landing").hide();
+});
+$(".nav-widget-redes").click(function(){
+    $(".nav-widget-landing").removeClass('active');
+    $(".nav-widget-site").removeClass("active");
+    $(".card-grafico-site").hide();
+    $(".card-grafico-landing").hide();
+
+});
+function buscaViewsSite(){
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: "actions/viewsSite.php",
+        processData: true,
+        success: function(data){
+            if(data.sucesso == true){
+                $("#dadosMensal").val(data.dadosMensal);
+                $("#categoriasMensal").val(data.categoriasMensal);
+                
+                $("#dadosSemanal").val(data.dadosSemanal);
+                $("#categoriasSemanal").val(data.categoriasSemanal);
+                
+                $("#dadosDiario").val(data.dadosDiario);
+                $("#categoriasDiario").val(data.categoriasDiario);
+                
+                $("#dadosMensalLanding").val(data.dadosMensalLanding);
+                $("#categoriasMensalLanding").val(data.categoriasSemanal);
+                
+                $("#dadosSemanalLanding").val(data.dadosSemanalLanding);
+                $("#categoriasSemanalLanding").val(data.categoriasSemanalLanding);
+                
+                $("#dadosDiarioLanding").val(data.dadosDiarioLanding);
+                $("#categoriasDiarioLanding").val(data.categoriasDiarioLanding);
+                
+                $("#dadosMensalEmail").val(data.dadosMensalEmail);
+                $("#categoriasMensalEmail").val(data.categoriasMensalEmail);
+                
+                $("#dadosSemanalEmail").val(data.dadosSemanalEmail);
+                $("#categoriasSemanalEmail").val(data.categoriasSemanal);
+                
+                $("#dadosDiarioEmail").val(data.dadosDiarioEmail);
+                $("#categoriasDiarioEmail").val(data.categoriasDiarioEmail);
+                
+                KTWidgets.init(); 
+        
+                $("#kt_charts_widget_3_chart").hide();
+                $("#kt_charts_widget_4_chart").hide();
+                $(".kt_charts_widget_23_chart").hide();
+                $(".kt_charts_widget_24_chart").hide();
+                $(".kt_charts_widget_33_chart").hide();
+                $(".kt_charts_widget_34_chart").hide();
+                $(".card-grafico-landing").hide();
+                $(".card-grafico-email").hide();
+                $(".card-grafico-redes").hide();
+                
+            } else{
+                swal("Erro!", "Houve um erro! Por favor, verifique os dados e tente novamente.", "error");
+            }
+        },
+        error: function(e){
+            console.log(e.message);
+        }
+    });   
+}
+function buscaViewsSite(){
+    $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: "actions/viewsLanding.php",
+        processData: true,
+        success: function(data){
+            if(data.sucesso == true){
+                $("#dadosMensal").val(data.dadosMensal);
+                $("#categoriasMensal").val(data.categoriasMensal);
+                
+                $("#dadosSemanal").val(data.dadosSemanal);
+                $("#categoriasSemanal").val(data.categoriasSemanal);
+                
+                $("#dadosDiario").val(data.dadosDiario);
+                $("#categoriasDiario").val(data.categoriasDiario);
+                
+                $("#dadosMensalLanding").val(data.dadosMensalLanding);
+                $("#categoriasMensalLanding").val(data.categoriasSemanal);
+                
+                $("#dadosSemanalLanding").val(data.dadosSemanalLanding);
+                $("#categoriasSemanalLanding").val(data.categoriasSemanalLanding);
+                
+                $("#dadosDiarioLanding").val(data.dadosDiarioLanding);
+                $("#categoriasDiarioLanding").val(data.categoriasDiarioLanding);
+                
+                $("#dadosMensalEmail").val(data.dadosMensalEmail);
+                $("#categoriasMensalEmail").val(data.categoriasMensalEmail);
+                
+                $("#dadosSemanalEmail").val(data.dadosSemanalEmail);
+                $("#categoriasSemanalEmail").val(data.categoriasSemanal);
+                
+                $("#dadosDiarioEmail").val(data.dadosDiarioEmail);
+                $("#categoriasDiarioEmail").val(data.categoriasDiarioEmail);
+                
+                KTWidgets.init(); 
+        
+                $("#kt_charts_widget_3_chart").hide();
+                $("#kt_charts_widget_4_chart").hide();
+                $(".kt_charts_widget_23_chart").hide();
+                $(".kt_charts_widget_24_chart").hide();
+                $(".kt_charts_widget_33_chart").hide();
+                $(".kt_charts_widget_34_chart").hide();
+                $(".card-grafico-landing").hide();
+                $(".card-grafico-email").hide();
+                $(".card-grafico-redes").hide();
+                
+            } else{
+                swal("Erro!", "Houve um erro! Por favor, verifique os dados e tente novamente.", "error");
+            }
+        },
+        error: function(e){
+            console.log(e.message);
+        }
+    });   
+}
+        
+jQuery(document).ready(function () {
+    buscaViewsSite();
+    setTimeout(() => { 
+        
+    }, 3000);
+    
+    
+});

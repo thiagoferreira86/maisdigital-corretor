@@ -2,7 +2,11 @@ deployment:
   tasks:
     - /bin/echo "🚀 Iniciando deploy para ambiente de desenvolvimento"
     - export DEPLOYPATH=/home/mapfrecorretor/public_html/dev
+
+    # 🆕 Atualiza CSS_VERSION e JS_VERSION com timestamp no .env
     - export VERSAO=$(date +%Y%m%d%H%M%S)
     - sed -i "s/^CSS_VERSION=.*/CSS_VERSION=$VERSAO/" $DEPLOYPATH/.env
     - sed -i "s/^JS_VERSION=.*/JS_VERSION=$VERSAO/" $DEPLOYPATH/.env
+
+    # 🗂️ Copia os arquivos
     - /bin/rsync -a --exclude='.git*' --exclude='vendor/' --exclude='.cpanel.yml' . $DEPLOYPATH

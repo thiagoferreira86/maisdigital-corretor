@@ -3,26 +3,58 @@ namespace App\Controllers;
 
 use App\Models\Corretora;
 use App\Models\CorretoraUsuario;
-use App\Models\CorretoraTentativaLogin;
 use App\Models\CorretoraSessao;
-use App\Models\Log;
-use App\Models\Slide;
-use App\Models\Video;
-use App\Models\Arte;
+use App\Models\TemplateLandingpage;
+use App\Models\Landing;
 use App\Models\View;
 use UAParser\Parser;
 
-
 class PaginaDeVendasController{
-    public function index(){
-        $ativa = 'Agenda';
-        $subativo = '';
+    
+    public function suasPaginas(){
+        $ativa = 'Página de Vendas';
+        $subativo = 'Suas Páginas';
         $corretoraNome = explode(" ", $_SESSION['corretora_nome']);
-        $slides = Slide::paginate(0, 3, "status = 'Ativo'");
-        $artes = Arte::paginate(0, 8, "status = 'Ativo'", "id DESC");
-        $videos = Video::paginate(0, 2, "status = 'Ativo'");
         $usuario = CorretoraUsuario::find($_SESSION['corretora_usuario_id']);
-        Log::grava('Acesso Agenda');
-        require_once __DIR__ . '/../Views/agenda.php';
+        $this->view('suas-paginas', compact(
+            'ativa', 'subativo', 'corretoraNome', 'usuario', 'templates'
+        ));
     }
+    public function modelosProntos(){
+        $ativa = 'Página de Vendas';
+        $subativo = 'Modelos Prontos';
+        $corretoraNome = explode(" ", $_SESSION['corretora_nome']);
+        $usuario = CorretoraUsuario::find($_SESSION['corretora_usuario_id']);
+        $templates = TemplateLandingpage::find(0, array("status = 'Ativo'"));
+        $this->view('modelos-prontos', compact(
+            'ativa', 'subativo', 'corretoraNome', 'usuario', 'templates'
+        ));
+    }
+    
+    public function pagina(){
+        $ativa = 'Página de Vendas';
+        $subativo = 'Página';
+        $corretoraNome = explode(" ", $_SESSION['corretora_nome']);
+        $usuario = CorretoraUsuario::find($_SESSION['corretora_usuario_id']);
+        $this->view('pagina', compact(
+            'ativa', 'subativo', 'corretoraNome', 'usuario', 'templates'
+        ));
+    }
+    
+    public function paginaPreview(){
+        $ativa = 'Página de Vendas';
+        $subativo = 'Página pré-visualização';
+        $corretoraNome = explode(" ", $_SESSION['corretora_nome']);
+        $usuario = CorretoraUsuario::find($_SESSION['corretora_usuario_id']);
+        $this->view('pagina-preview', compact(
+            'ativa', 'subativo', 'corretoraNome', 'usuario'
+        ));
+    }
+    
+    private function view(string $path, array $data = []): void
+    {
+        extract($data);
+        require_once __DIR__ . "/../Views/dashboard/pagina-de-vendas/{$path}.php";
+    }
+    
 }
