@@ -1,0 +1,1 @@
+<div class="preloader">    <div class="preloaderImagem">        <img src="https://app.otimize.online/assets/media/logos/otimize_loader.png"><br>        Aguarde...    </div></div>

@@ -1,0 +1,8 @@
+deployment:
+  tasks:
+    - /bin/echo "🚀 Iniciando deploy para ambiente de desenvolvimento"
+    - export DEPLOYPATH=/home/mapfrecorretor/public_html/dev
+    - export VERSAO=$(date +%Y%m%d%H%M%S)
+    - sed -i "s/^CSS_VERSION=.*/CSS_VERSION=$VERSAO/" $DEPLOYPATH/.env
+    - sed -i "s/^JS_VERSION=.*/JS_VERSION=$VERSAO/" $DEPLOYPATH/.env
+    - /bin/rsync -a --exclude='.git*' --exclude='vendor/' --exclude='.cpanel.yml' . $DEPLOYPATH

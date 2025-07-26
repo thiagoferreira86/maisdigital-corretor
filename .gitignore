@@ -3,6 +3,7 @@
 node_modules/
 storage/
 uploads/
+/public/imagens/
 
 # Arquivos de configuração sensíveis
 .env

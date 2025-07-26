@@ -1,0 +1,202 @@
+<?php
+
+use App\Controllers\LoginController;
+use App\Controllers\DashboardController;
+use App\Controllers\AgendaController;
+use App\Controllers\RedesSociaisController;
+use App\Controllers\PaginadeVendasController;
+use App\Controllers\EmailMarketingController;
+use App\Controllers\ListaDeContatosController;
+use App\Controllers\TutoriaisController;
+use App\Controllers\UtilsController;
+use App\Helpers\Session;
+use PHPMailer\PHPMailer;
+use App\Models\CorretoraUsuario;
+
+Session::start();
+
+$url = $_SERVER['REQUEST_URI'];
+$segments = explode('/', trim($url, '/'));
+
+if($segments[0] == ''){
+    $controllerName = 'dashboard';
+} else {
+    $controllerName = $segments[0];
+}
+$action = $segments[1] ?? 'index';
+$params = array_slice($segments, 2);
+
+//print $controllerName;
+// Verificação centralizada de sessão
+if (in_array($controllerName, $rotasProtegidas) && !Session::isLoggedIn()) {
+    header("Location: /login");
+    exit;
+} 
+switch ($controllerName) {
+    case 'dashboard':
+        $controller = new DashboardController();
+        switch ($action) {
+            case 'perfil':
+                switch ($param1) {
+                    case 'atualiza-senha':
+                        $controller->{$param1_function}();
+                        break;
+                    case 'atualiza-dados':
+                        $controller->{$param1_function}();
+                        break;
+                    default:
+                        $controller->perfil();
+                        break;
+                }
+                break;
+            case 'aceite-termos':
+                $controller->aceiteTermos();
+                break;
+            case 'aceitar-termos':
+                $controller->aceitarTermos();
+                break;
+            case 'agenda':
+                agendaExecute($params);
+                break;
+            case 'redes-sociais':
+                $controller = new RedesSociaisController();
+                switch ($param1) {
+                    case 'lista-artes':
+                        $controller->{$param1_function}();
+                        break;
+                    default:
+                        $controller->index();
+                        break;
+                }
+                break;
+            case 'pagina-de-vendas':
+                $controller = new PaginadeVendasController();
+                switch ($param1) {
+                    case 'modelos-prontos':
+                        $controller->{$param1_function}();
+                        break;
+                    case 'suas-paginas':
+                        $controller->{$param1_function}();
+                        break;
+                    default:
+                        $controller->index();
+                        break;
+                }
+                break;
+            case 'cartao-digital':
+                $controller = new CartaoDigitalController();
+                switch ($param1) {
+                    case 'lista-artes':
+                        $controller->{$param1_function}();
+                        break;
+                    default:
+                        $controller->index();
+                        break;
+                }
+                break;    
+            case 'email-marketing':
+                $controller = new EmailMarketingController();
+                switch ($param1) {
+                    case 'lista-artes':
+                        $controller->{$param1_function}();
+                        break;
+                    default:
+                        $controller->index();
+                        break;
+                }
+                break;
+            case 'lista-de-contatos':
+                $controller = new ListaDeContatosController();
+                switch ($param1) {
+                    case 'lista-artes':
+                        $controller->{$param1_function}();
+                        break;
+                    default:
+                        $controller->index();
+                        break;
+                }
+                break;
+            case 'tutoriais':
+                $controller = new TutoriaisController();
+                switch ($param1) {
+                    case 'lista-artes':
+                        $controller->{$param1_function}();
+                        break;
+                    default:
+                        $controller->index();
+                        break;
+                }
+                break;
+            case 'logout':
+                $controller->logout();
+                break;
+            default:
+                $controller->index();
+                break;
+        }
+        break;
+    case 'verificar-codigo':
+        $controller = new LoginController();
+        $controller->verificarCodigo();
+        break;
+    case 'validar-codigo':
+        $controller = new LoginController();
+        $controller->validarCodigo();
+        break;   
+    case 'pass':
+        $controller = new UtilsController();
+        $controller->pass();
+        break;   
+    case 'login':
+        $controller = new LoginController();
+        switch ($action) {
+            case 'auth':
+                $controller->{$action}();
+                break;
+            case 'logout':
+                $controller->{$action}();
+                break;
+            default:
+                $controller->index();
+                break;
+        }
+        break;
+    default:
+        http_response_code(404);
+        echo "Página não encontrada";
+        break;
+}
+
+
+function agendaExecute($params){
+    $param1 = $params[0] ?? '';
+    if(!empty($param1)){
+       $param1_explode = explode("-", $param1);
+       $p0 = $param1_explode[0] ?? '';
+       $p1 = $param1_explode[1] ? ucfirst($param1_explode[1]) : '';
+       $p2 = $param1_explode[2] ? ucfirst($param1_explode[2]) : '';
+       $param1_function = $p0.$p1.$p2;
+    }
+    
+    $param2 = $param[2] ?? '';
+    if(!empty($param2)){
+        $param2_explode = explode("-", $param2);
+        $p0 = $param2_explode[0] ?? '';
+        $p1 = $param2_explode[1] ? ucfirst($param2_explode[1]) : '';
+        $p2 = $param2_explode[2] ? ucfirst($param2_explode[2]) : '';
+        $param2_function = $p0.$p1.$p2;
+    }
+        
+    $controller = new AgendaController();
+    switch ($param1) {
+        case 'atualiza-senha':
+            return $controller->{$param1_function}();
+            break;
+        case 'atualiza-dados':
+            return $controller->{$param1_function}();
+            break;
+        default:
+            return $controller->AgendaController();
+            break;
+    }
+}
